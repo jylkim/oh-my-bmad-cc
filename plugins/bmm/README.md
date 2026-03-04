@@ -1,6 +1,6 @@
 # bmm
 
-Parallel pipeline skills for BMAD BMM workflows. Speeds up story creation, story development, code review, and research by running independent tasks concurrently with Agent Teams.
+Pipeline skills for BMAD BMM workflows. Parallelizes story creation, development, code review, and research with Agent Teams, and provides context-isolated review for unbiased adversarial analysis.
 
 ## Skills
 
@@ -101,3 +101,15 @@ Four research agents run simultaneously:
 | Technical Trends | technical-trends-analyst | Sonnet | Emerging technologies, innovation patterns |
 
 Agents report key findings summaries; team lead coordinates user [C] Continue approval. Upon approval, agents write directly to the document before shutdown.
+
+### [omb-bmm-quick-dev-isolated-review](skills/omb-bmm-quick-dev-isolated-review/SKILL.md)
+
+Context-isolated adversarial review for `bmad-bmm-quick-dev`. Overrides step 5 by spawning a separate agent with no implementation context.
+
+The main agent runs steps 1–4 normally, then constructs a diff and hands it to an isolated reviewer:
+
+| Role | Agent | Model | Focus |
+|------|-------|-------|-------|
+| Adversarial Reviewer | (foreground sub-agent) | Opus | Diff-only review with zero implementation context |
+
+The reviewer receives only the diff and `review-adversarial-general.xml` — no plans, decisions, or self-check results. This eliminates confirmation bias from the implementing agent reviewing its own work. Findings are processed back by the main agent before resuming step 6.

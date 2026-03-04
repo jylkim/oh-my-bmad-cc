@@ -152,6 +152,11 @@ Also, do not repeat content in Shared Conventions that is already described in t
 
 The skill's role is to describe the **parallelization strategy**, not to rewrite the original workflow. Agents can read instructions.xml directly.
 
+## Documentation
+
+When creating or modifying a skill, update the plugin's `README.md` (e.g., `plugins/{plugin}/README.md`) with a matching entry. Follow the existing format: linked heading, one-line description, agent table, and a brief explanation of the skill's approach.
+
 ## Reference Examples
 
 - `plugins/bmm/skills/omb-bmm-dev-story-parallel/` — 4-stage TDD pipeline, 2 branches (implementation + review continuation)
+- `plugins/bmm/skills/omb-bmm-quick-dev-isolated-review/` — single-agent context isolation (no team, foreground sub-agent)
