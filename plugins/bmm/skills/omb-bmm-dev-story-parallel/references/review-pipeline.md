@@ -2,6 +2,10 @@
 
 Lightweight 2-stage pipeline for addressing `[AI-Review]` action items after code review. All implementation tasks are already complete — only review findings need to be fixed.
 
+## Teammate Personas
+
+Persona files are in `personas/` (relative to this directory). Before constructing each spawn prompt, read the corresponding persona YAML and include its `persona` block as the agent's identity at the top of the prompt.
+
 ## Phase R1: Review Item Analysis
 
 1. **Extract all unchecked `[AI-Review]` items** from "Tasks/Subtasks → Review Follow-ups (AI)" section
@@ -46,12 +50,11 @@ Final task:
 Spawn **refactorer-{R}** as a background teammate (model: **sonnet**)
 
 ```
-You are a team member of team "dev-{{story_key}}-review".
+{persona from personas/review-fixer.yaml}
+You are refactorer-{R} of team "dev-{{story_key}}-review".
 Your task: fix-{R}
 
 Read {installed_path}/instructions.xml for project conventions reference.
-
-You are addressing a code review finding. All implementation and tests already exist and pass.
 
 Review finding to address:
 - Severity: {severity}
@@ -79,7 +82,8 @@ When complete, mark fix-{R} as completed and report to team-lead with:
 When refactorer-{R} sends its completion message, **immediately** spawn **validator-{R}** as a background teammate (model: **sonnet**)
 
 ```
-You are a team member of team "dev-{{story_key}}-review".
+{persona from personas/validator.yaml}
+You are validator-{R} of team "dev-{{story_key}}-review".
 Your task: verify-{R}
 
 Read {installed_path}/instructions.xml for validation reference.
@@ -137,7 +141,8 @@ After ALL verify-{R} tasks are completed, spawn:
 **integration-validator** as a background teammate (model: **opus**)
 
 ```
-You are a team member of team "dev-{{story_key}}-review".
+{persona from personas/integration-validator.yaml}
+You are integration-validator of team "dev-{{story_key}}-review".
 Your task: integration-validate
 
 Run the full regression test suite for the entire project.

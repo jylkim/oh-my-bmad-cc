@@ -73,10 +73,33 @@ Spawn **{agent-name}** as a background teammate (model: **{model}**)
 - Specify the model only in the spawn header. Do not create a separate "Model Selection" section.
 - Mechanical tasks → sonnet, judgment-heavy tasks → opus
 
+### Teammate Personas
+
+Define teammate personas as YAML files in `references/personas/` following the BMAD agent persona format:
+
+```yaml
+persona:
+  role: Short role title — pipeline phase context
+  identity: >
+    1-2 sentences. What this teammate does and how it approaches the work.
+  communication_style: "One sentence. Tone and reporting style."
+  principles: |
+    - Responsible for: positive scope (what this teammate owns)
+    - Not responsible for: negative scope (what belongs to other pipeline stages)
+    - Any additional behavioral constraint specific to this role
+```
+
+**Key rules:**
+- `role`: imperative title + pipeline phase (e.g., "Test-first specialist — Red phase of the TDD pipeline")
+- `communication_style`: follows BMAD convention — a single quoted sentence defining tone
+- `principles`: always include both positive and negative scope to prevent agents from wandering into other stages' territory
+- One persona file per distinct role. Roles shared across pipelines (e.g., `validator.yaml`) reuse the same file.
+
 ### Prompt Structure
 
 ```
-You are a team member of team "{team-name}".
+{persona from personas/{role}.yaml}
+You are {agent-name} of team "{team-name}".
 Your task: {task-name}
 
 Read {installed_path}/instructions.xml and execute the following for {scope} ONLY:
@@ -88,10 +111,18 @@ When complete, mark {task-name} as completed and report to team-lead with:
 - {report items}
 ```
 
+Pipeline files must include a "Teammate Personas" section instructing the team lead to read and embed persona content:
+
+```markdown
+## Teammate Personas
+
+Persona files are in `personas/` (relative to this directory). Before constructing each spawn prompt,
+read the corresponding persona YAML and include its `persona` block as the agent's identity at the top of the prompt.
+```
+
 **Do not:**
 - Copy checklists or logic from instructions.xml into the prompt
 - Duplicate content that the agent can read directly
-
 **Do:**
 - Specify exactly which section of instructions.xml to execute
 - Pass preceding step outputs via base context

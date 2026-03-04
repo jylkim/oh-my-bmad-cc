@@ -36,6 +36,10 @@ After completing instructions.xml step 1, prepare a base context block with all 
 
 Create a team named `story-{{story_key}}`.
 
+### Teammate Personas
+
+Persona files are in `references/personas/` (relative to this skill's directory). Before constructing each spawn prompt, read the corresponding persona YAML and include its `persona` block as the agent's identity at the top of the prompt.
+
 ### Parallel Research
 
 Spawn ALL 3 teammates in a SINGLE message (`run_in_background: true`):
@@ -43,7 +47,8 @@ Spawn ALL 3 teammates in a SINGLE message (`run_in_background: true`):
 **artifact-analyst** — Step 2, model: **opus**
 
 ```
-You are a team member of team "story-{{story_key}}".
+{persona from references/personas/artifact-analyst.yaml}
+You are artifact-analyst of team "story-{{story_key}}".
 
 Read {installed_path}/instructions.xml and execute <step n="2"> exactly as written.
 Resolve all references using the workflow context below.
@@ -57,7 +62,8 @@ Then go idle — you may receive follow-up requests for deeper investigation.
 **architecture-analyst** — Step 3, model: **sonnet**
 
 ```
-You are a team member of team "story-{{story_key}}".
+{persona from references/personas/architecture-analyst.yaml}
+You are architecture-analyst of team "story-{{story_key}}".
 
 Read {installed_path}/instructions.xml and execute <step n="3"> exactly as written.
 Resolve all references using the workflow context below.
@@ -71,7 +77,8 @@ Then go idle — you may receive follow-up requests for deeper investigation.
 **tech-researcher** — Step 4, model: **sonnet**
 
 ```
-You are a team member of team "story-{{story_key}}".
+{persona from references/personas/tech-researcher.yaml}
+You are tech-researcher of team "story-{{story_key}}".
 
 Read {installed_path}/instructions.xml and execute <step n="4"> exactly as written.
 Resolve all references using the workflow context below.

@@ -36,6 +36,10 @@ After completing instructions.xml step 2, prepare a base context block with all 
 
 Create a team named `code-review-{{story_key}}`.
 
+### Teammate Personas
+
+Persona files are in `references/personas/` (relative to this skill's directory). Before constructing each spawn prompt, read the corresponding persona YAML and include its `persona` block as the agent's identity at the top of the prompt.
+
 Create tracked tasks for each review dimension. The first 4 are independent. The aggregate task depends on all 4 completing.
 
 - **git-audit**: "Cross-reference git changes vs story File List"
@@ -55,7 +59,8 @@ All 4 review dimensions are independent — spawn ALL reviewer agents in a SINGL
 Spawn **git-auditor** as a background teammate (model: **sonnet**)
 
 ```
-You are a team member of team "code-review-{{story_key}}".
+{persona from references/personas/git-auditor.yaml}
+You are git-auditor of team "code-review-{{story_key}}".
 Your task: git-audit
 
 Read {installed_path}/instructions.xml and execute the following from step 3 ONLY:
@@ -75,7 +80,8 @@ When complete, mark git-audit as completed and report to team-lead with:
 Spawn **ac-validator** as a background teammate (model: **opus**)
 
 ```
-You are a team member of team "code-review-{{story_key}}".
+{persona from references/personas/ac-validator.yaml}
+You are ac-validator of team "code-review-{{story_key}}".
 Your task: ac-validate
 
 Read {installed_path}/instructions.xml and execute the following from step 3 ONLY:
@@ -96,7 +102,8 @@ When complete, mark ac-validate as completed and report to team-lead with:
 Spawn **task-auditor** as a background teammate (model: **opus**)
 
 ```
-You are a team member of team "code-review-{{story_key}}".
+{persona from references/personas/task-auditor.yaml}
+You are task-auditor of team "code-review-{{story_key}}".
 Your task: task-audit
 
 Read {installed_path}/instructions.xml and execute the following from step 3 ONLY:
@@ -117,7 +124,8 @@ When complete, mark task-audit as completed and report to team-lead with:
 Spawn **code-reviewer** as a background teammate (model: **opus**)
 
 ```
-You are a team member of team "code-review-{{story_key}}".
+{persona from references/personas/code-reviewer.yaml}
+You are code-reviewer of team "code-review-{{story_key}}".
 Your task: code-quality
 
 Read {installed_path}/instructions.xml and execute the following from step 3 ONLY:

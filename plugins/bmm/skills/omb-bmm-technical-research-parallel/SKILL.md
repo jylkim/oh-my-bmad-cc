@@ -39,6 +39,10 @@ After completing step 1, prepare a base context block with all resolved workflow
 
 Create a team named `tech-research`.
 
+### Teammate Personas
+
+Persona files are in `references/personas/` (relative to this skill's directory). Before constructing each spawn prompt, read the corresponding persona YAML and include its `persona` block as the agent's identity at the top of the prompt.
+
 ### Parallel Research
 
 Spawn ALL 4 teammates in a single message as background agents:
@@ -46,7 +50,8 @@ Spawn ALL 4 teammates in a single message as background agents:
 **tech-stack-analyst** — Step 2, model: **sonnet**
 
 ```
-You are a team member of team "tech-research".
+{persona from references/personas/tech-stack-analyst.yaml}
+You are tech-stack-analyst of team "tech-research".
 Your task: Technology Stack Analysis
 
 Read {steps_path}/step-02-technical-overview.md and conduct the Technology Stack Analysis research.
@@ -67,7 +72,8 @@ After team-lead relays user approval, append your full research content to the o
 **integration-analyst** — Step 3, model: **sonnet**
 
 ```
-You are a team member of team "tech-research".
+{persona from references/personas/integration-analyst.yaml}
+You are integration-analyst of team "tech-research".
 Your task: Integration Patterns Analysis
 
 Read {steps_path}/step-03-integration-patterns.md and conduct the Integration Patterns research.
@@ -88,7 +94,8 @@ After team-lead relays user approval, append your full research content to the o
 **architecture-analyst** — Step 4, model: **sonnet**
 
 ```
-You are a team member of team "tech-research".
+{persona from references/personas/architecture-analyst.yaml}
+You are architecture-analyst of team "tech-research".
 Your task: Architectural Patterns Analysis
 
 Read {steps_path}/step-04-architectural-patterns.md and conduct the Architectural Patterns research.
@@ -109,7 +116,8 @@ After team-lead relays user approval, append your full research content to the o
 **implementation-researcher** — Step 5, model: **sonnet**
 
 ```
-You are a team member of team "tech-research".
+{persona from references/personas/implementation-researcher.yaml}
+You are implementation-researcher of team "tech-research".
 Your task: Implementation Research
 
 Read {steps_path}/step-05-implementation-research.md and conduct the Implementation Research.

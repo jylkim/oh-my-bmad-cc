@@ -2,6 +2,10 @@
 
 Full 4-stage TDD pipeline for fresh story implementation. Overrides instructions.xml steps 5-8.
 
+## Teammate Personas
+
+Persona files are in `personas/` (relative to this directory). Before constructing each spawn prompt, read the corresponding persona YAML and include its `persona` block as the agent's identity at the top of the prompt.
+
 ## Phase 1: Per-Task Dependency Analysis
 
 Parse tasks from the story file and build a **per-task** execution plan:
@@ -61,7 +65,8 @@ Final task:
 Spawn **tester-{N}** as a background teammate (model: **sonnet**)
 
 ```
-You are a team member of team "dev-{{story_key}}".
+{persona from personas/tester.yaml}
+You are tester-{N} of team "dev-{{story_key}}".
 Your task: red-{N}
 
 Read {installed_path}/instructions.xml and execute the following for Task {N} ONLY:
@@ -95,7 +100,8 @@ When complete, mark red-{N} as completed and report to team-lead with:
 When tester-{N} sends its completion message, **immediately** spawn **implementer-{N}** as a background teammate (model: **sonnet**)
 
 ```
-You are a team member of team "dev-{{story_key}}".
+{persona from personas/implementer.yaml}
+You are implementer-{N} of team "dev-{{story_key}}".
 Your task: green-{N}
 
 Read {installed_path}/instructions.xml and execute the following for Task {N} ONLY:
@@ -135,7 +141,8 @@ When complete, mark green-{N} as completed and report to team-lead with:
 When implementer-{N} sends its completion message, **immediately** spawn **refactorer-{N}** as a background teammate (model: **sonnet**)
 
 ```
-You are a team member of team "dev-{{story_key}}".
+{persona from personas/refactorer.yaml}
+You are refactorer-{N} of team "dev-{{story_key}}".
 Your task: refactor-{N}
 
 Read {installed_path}/instructions.xml and execute the following for Task {N} ONLY:
@@ -178,7 +185,8 @@ When complete, mark refactor-{N} as completed and report to team-lead with:
 When refactorer-{N} sends its completion message, **immediately** spawn **validator-{N}** as a background teammate (model: **sonnet**)
 
 ```
-You are a team member of team "dev-{{story_key}}".
+{persona from personas/validator.yaml}
+You are validator-{N} of team "dev-{{story_key}}".
 Your task: verify-{N}
 
 Read {installed_path}/instructions.xml and execute the following for Task {N}:
@@ -243,7 +251,8 @@ After ALL verify-{N} tasks are completed, spawn:
 **integration-validator** as a background teammate (model: **opus**)
 
 ```
-You are a team member of team "dev-{{story_key}}".
+{persona from personas/integration-validator.yaml}
+You are integration-validator of team "dev-{{story_key}}".
 Your task: integration-validate
 
 Run the full regression test suite for the entire project.

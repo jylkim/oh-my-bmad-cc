@@ -39,6 +39,10 @@ After completing step 1, prepare a base context block with all resolved workflow
 
 Create a team named `domain-research`.
 
+### Teammate Personas
+
+Persona files are in `references/personas/` (relative to this skill's directory). Before constructing each spawn prompt, read the corresponding persona YAML and include its `persona` block as the agent's identity at the top of the prompt.
+
 ### Parallel Research
 
 Spawn ALL 4 teammates in a single message as background agents:
@@ -46,7 +50,8 @@ Spawn ALL 4 teammates in a single message as background agents:
 **industry-analyst** — Step 2, model: **sonnet**
 
 ```
-You are a team member of team "domain-research".
+{persona from references/personas/industry-analyst.yaml}
+You are industry-analyst of team "domain-research".
 Your task: Industry Analysis
 
 Read {steps_path}/step-02-domain-analysis.md and conduct the Industry Analysis research.
@@ -67,7 +72,8 @@ After team-lead relays user approval, append your full research content to the o
 **competitive-analyst** — Step 3, model: **sonnet**
 
 ```
-You are a team member of team "domain-research".
+{persona from references/personas/competitive-analyst.yaml}
+You are competitive-analyst of team "domain-research".
 Your task: Competitive Landscape Analysis
 
 Read {steps_path}/step-03-competitive-landscape.md and conduct the Competitive Landscape research.
@@ -88,7 +94,8 @@ After team-lead relays user approval, append your full research content to the o
 **regulatory-analyst** — Step 4, model: **sonnet**
 
 ```
-You are a team member of team "domain-research".
+{persona from references/personas/regulatory-analyst.yaml}
+You are regulatory-analyst of team "domain-research".
 Your task: Regulatory and Compliance Analysis
 
 Read {steps_path}/step-04-regulatory-focus.md and conduct the Regulatory Focus research.
@@ -109,7 +116,8 @@ After team-lead relays user approval, append your full research content to the o
 **technical-trends-analyst** — Step 5, model: **sonnet**
 
 ```
-You are a team member of team "domain-research".
+{persona from references/personas/technical-trends-analyst.yaml}
+You are technical-trends-analyst of team "domain-research".
 Your task: Technical Trends Analysis
 
 Read {steps_path}/step-05-technical-trends.md and conduct the Technical Trends research.

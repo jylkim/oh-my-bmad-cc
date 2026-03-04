@@ -39,6 +39,10 @@ After completing step 1, prepare a base context block with all resolved workflow
 
 Create a team named `market-research`.
 
+### Teammate Personas
+
+Persona files are in `references/personas/` (relative to this skill's directory). Before constructing each spawn prompt, read the corresponding persona YAML and include its `persona` block as the agent's identity at the top of the prompt.
+
 ### Parallel Research
 
 Spawn ALL 4 teammates in a single message as background agents:
@@ -46,7 +50,8 @@ Spawn ALL 4 teammates in a single message as background agents:
 **customer-behavior-analyst** — Step 2, model: **sonnet**
 
 ```
-You are a team member of team "market-research".
+{persona from references/personas/customer-behavior-analyst.yaml}
+You are customer-behavior-analyst of team "market-research".
 Your task: Customer Behavior and Segments Analysis
 
 Read {steps_path}/step-02-customer-behavior.md and conduct the Customer Behavior and Segments research.
@@ -67,7 +72,8 @@ After team-lead relays user approval, append your full research content to the o
 **pain-points-analyst** — Step 3, model: **sonnet**
 
 ```
-You are a team member of team "market-research".
+{persona from references/personas/pain-points-analyst.yaml}
+You are pain-points-analyst of team "market-research".
 Your task: Customer Pain Points and Needs Analysis
 
 Read {steps_path}/step-03-customer-pain-points.md and conduct the Customer Pain Points and Needs research.
@@ -88,7 +94,8 @@ After team-lead relays user approval, append your full research content to the o
 **decision-journey-analyst** — Step 4, model: **sonnet**
 
 ```
-You are a team member of team "market-research".
+{persona from references/personas/decision-journey-analyst.yaml}
+You are decision-journey-analyst of team "market-research".
 Your task: Customer Decisions and Journey Analysis
 
 Read {steps_path}/step-04-customer-decisions.md and conduct the Customer Decisions and Journey research.
@@ -109,7 +116,8 @@ After team-lead relays user approval, append your full research content to the o
 **competitive-analyst** — Step 5, model: **sonnet**
 
 ```
-You are a team member of team "market-research".
+{persona from references/personas/competitive-analyst.yaml}
+You are competitive-analyst of team "market-research".
 Your task: Competitive Analysis
 
 Read {steps_path}/step-05-competitive-analysis.md and conduct the Competitive Analysis research.
