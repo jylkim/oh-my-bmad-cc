@@ -4,7 +4,7 @@ Full 4-stage TDD pipeline for fresh story implementation. Overrides instructions
 
 ## Teammate Personas
 
-Persona files are in `personas/` (relative to this directory). Before constructing each spawn prompt, read the corresponding persona YAML and include its `persona` block as the agent's identity at the top of the prompt.
+Persona files are in `references/personas/` (relative to the skill root). Before constructing each spawn prompt, read the corresponding persona YAML and include its `persona` block as the agent's identity at the top of the prompt.
 
 ## Phase 1: Per-Task Dependency Analysis
 
@@ -65,7 +65,7 @@ Final task:
 Spawn **tester-{N}** as a background teammate (model: **sonnet**)
 
 ```
-{persona from personas/tester.yaml}
+{persona from references/personas/tester.yaml}
 You are tester-{N} of team "dev-{{story_key}}".
 Your task: red-{N}
 
@@ -100,7 +100,7 @@ When complete, mark red-{N} as completed and report to team-lead with:
 When tester-{N} sends its completion message, **immediately** spawn **implementer-{N}** as a background teammate (model: **sonnet**)
 
 ```
-{persona from personas/implementer.yaml}
+{persona from references/personas/implementer.yaml}
 You are implementer-{N} of team "dev-{{story_key}}".
 Your task: green-{N}
 
@@ -141,7 +141,7 @@ When complete, mark green-{N} as completed and report to team-lead with:
 When implementer-{N} sends its completion message, **immediately** spawn **refactorer-{N}** as a background teammate (model: **sonnet**)
 
 ```
-{persona from personas/refactorer.yaml}
+{persona from references/personas/refactorer.yaml}
 You are refactorer-{N} of team "dev-{{story_key}}".
 Your task: refactor-{N}
 
@@ -185,7 +185,7 @@ When complete, mark refactor-{N} as completed and report to team-lead with:
 When refactorer-{N} sends its completion message, **immediately** spawn **validator-{N}** as a background teammate (model: **sonnet**)
 
 ```
-{persona from personas/validator.yaml}
+{persona from references/personas/validator.yaml}
 You are validator-{N} of team "dev-{{story_key}}".
 Your task: verify-{N}
 
@@ -251,7 +251,7 @@ After ALL verify-{N} tasks are completed, spawn:
 **integration-validator** as a background teammate (model: **opus**)
 
 ```
-{persona from personas/integration-validator.yaml}
+{persona from references/personas/integration-validator.yaml}
 You are integration-validator of team "dev-{{story_key}}".
 Your task: integration-validate
 

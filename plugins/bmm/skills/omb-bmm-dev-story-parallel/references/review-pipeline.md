@@ -4,7 +4,7 @@ Lightweight 2-stage pipeline for addressing `[AI-Review]` action items after cod
 
 ## Teammate Personas
 
-Persona files are in `personas/` (relative to this directory). Before constructing each spawn prompt, read the corresponding persona YAML and include its `persona` block as the agent's identity at the top of the prompt.
+Persona files are in `references/personas/` (relative to the skill root). Before constructing each spawn prompt, read the corresponding persona YAML and include its `persona` block as the agent's identity at the top of the prompt.
 
 ## Phase R1: Review Item Analysis
 
@@ -50,7 +50,7 @@ Final task:
 Spawn **refactorer-{R}** as a background teammate (model: **sonnet**)
 
 ```
-{persona from personas/review-fixer.yaml}
+{persona from references/personas/review-fixer.yaml}
 You are refactorer-{R} of team "dev-{{story_key}}-review".
 Your task: fix-{R}
 
@@ -82,7 +82,7 @@ When complete, mark fix-{R} as completed and report to team-lead with:
 When refactorer-{R} sends its completion message, **immediately** spawn **validator-{R}** as a background teammate (model: **sonnet**)
 
 ```
-{persona from personas/validator.yaml}
+{persona from references/personas/validator.yaml}
 You are validator-{R} of team "dev-{{story_key}}-review".
 Your task: verify-{R}
 
@@ -141,7 +141,7 @@ After ALL verify-{R} tasks are completed, spawn:
 **integration-validator** as a background teammate (model: **opus**)
 
 ```
-{persona from personas/integration-validator.yaml}
+{persona from references/personas/integration-validator.yaml}
 You are integration-validator of team "dev-{{story_key}}-review".
 Your task: integration-validate
 

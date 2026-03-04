@@ -98,7 +98,7 @@ persona:
 ### Prompt Structure
 
 ```
-{persona from personas/{role}.yaml}
+{persona from references/personas/{role}.yaml}
 You are {agent-name} of team "{team-name}".
 Your task: {task-name}
 
@@ -116,7 +116,7 @@ Pipeline files must include a "Teammate Personas" section instructing the team l
 ```markdown
 ## Teammate Personas
 
-Persona files are in `personas/` (relative to this directory). Before constructing each spawn prompt,
+Persona files are in `references/personas/` (relative to the skill root). Before constructing each spawn prompt,
 read the corresponding persona YAML and include its `persona` block as the agent's identity at the top of the prompt.
 ```
 
