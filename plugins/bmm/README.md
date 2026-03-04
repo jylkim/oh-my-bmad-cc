@@ -1,6 +1,6 @@
 # bmm
 
-Parallel pipeline skills for BMAD BMM workflows. Speeds up story creation, story development, and code review by running independent tasks concurrently with Agent Teams.
+Parallel pipeline skills for BMAD BMM workflows. Speeds up story creation, story development, code review, and research by running independent tasks concurrently with Agent Teams.
 
 ## Skills
 
@@ -56,3 +56,48 @@ Four independent reviewers run simultaneously:
 | Code Quality | code-reviewer | Opus | Deep code quality review |
 
 Findings are aggregated, deduplicated, and categorized by severity after all reviewers complete.
+
+### [omb-bmm-technical-research-parallel](skills/omb-bmm-technical-research-parallel/SKILL.md)
+
+Parallelized execution of `bmad-bmm-technical-research`. Overrides research steps (2–5) with 4 concurrent specialist agents.
+
+Four research agents run simultaneously:
+
+| Area | Agent | Model | Focus |
+|------|-------|-------|-------|
+| Technology Stack | tech-stack-analyst | Sonnet | Languages, frameworks, tools, platforms |
+| Integration Patterns | integration-analyst | Sonnet | APIs, protocols, interoperability |
+| Architectural Patterns | architecture-analyst | Sonnet | System design, scalability, security |
+| Implementation | implementation-researcher | Sonnet | Adoption strategies, workflows, operations |
+
+Agents report key findings summaries; team lead coordinates user [C] Continue approval. Upon approval, agents write directly to the document before shutdown.
+
+### [omb-bmm-market-research-parallel](skills/omb-bmm-market-research-parallel/SKILL.md)
+
+Parallelized execution of `bmad-bmm-market-research`. Overrides research steps (2–5) with 4 concurrent specialist agents.
+
+Four research agents run simultaneously:
+
+| Area | Agent | Model | Focus |
+|------|-------|-------|-------|
+| Customer Behavior | customer-behavior-analyst | Sonnet | Behavior patterns, segments, demographics |
+| Pain Points | pain-points-analyst | Sonnet | Challenges, frustrations, unmet needs |
+| Decision Journey | decision-journey-analyst | Sonnet | Decision criteria, touchpoints, journey mapping |
+| Competitive Analysis | competitive-analyst | Sonnet | Market positioning, competitive landscape |
+
+Agents report key findings summaries; team lead coordinates user [C] Continue approval. Upon approval, agents write directly to the document before shutdown.
+
+### [omb-bmm-domain-research-parallel](skills/omb-bmm-domain-research-parallel/SKILL.md)
+
+Parallelized execution of `bmad-bmm-domain-research`. Overrides research steps (2–5) with 4 concurrent specialist agents.
+
+Four research agents run simultaneously:
+
+| Area | Agent | Model | Focus |
+|------|-------|-------|-------|
+| Industry Analysis | industry-analyst | Sonnet | Market size, growth, industry dynamics |
+| Competitive Landscape | competitive-analyst | Sonnet | Key players, market share, competitive dynamics |
+| Regulatory Focus | regulatory-analyst | Sonnet | Regulations, compliance, standards |
+| Technical Trends | technical-trends-analyst | Sonnet | Emerging technologies, innovation patterns |
+
+Agents report key findings summaries; team lead coordinates user [C] Continue approval. Upon approval, agents write directly to the document before shutdown.

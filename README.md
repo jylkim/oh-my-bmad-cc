@@ -45,7 +45,7 @@ Restart Claude Code after installation.
 
 ### [bmm](plugins/bmm/README.md)
 
-Parallel pipeline skills for BMAD BMM workflows. Parallelizes story creation, story development (TDD), and code review using concurrent Agent Teams.
+Parallel pipeline skills for BMAD BMM workflows. Parallelizes story creation, story development (TDD), code review, and research (technical, market, domain) using concurrent Agent Teams.
 
 ## Development Guide
 
