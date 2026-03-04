@@ -8,7 +8,7 @@ Scale-out extensions for [BMAD Method](https://github.com/bmad-code-org/BMAD-MET
 
 - [Claude Code](https://code.claude.com/docs/en/setup) CLI
 - [Claude Code Agent Teams](https://code.claude.com/docs/en/agent-teams) enabled (experimental feature)
-- [BMAD Method](https://github.com/bmad-code-org/BMAD-METHOD) installed in your project
+- [BMAD Method](https://github.com/bmad-code-org/BMAD-METHOD) v6+ installed in your project
 
 #### Enabling Agent Teams
 
