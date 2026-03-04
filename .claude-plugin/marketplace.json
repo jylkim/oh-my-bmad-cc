@@ -1,0 +1,16 @@
+{
+  "name": "oh-my-bmad",
+  "owner": {
+    "name": "jylkim"
+  },
+  "metadata": {
+    "description": "Parallel pipeline extensions for BMAD Method"
+  },
+  "plugins": [
+    {
+      "name": "bmm",
+      "source": "./plugins/bmm",
+      "description": "Parallel pipeline skills for BMAD BMM workflows. Speeds up story development, code review, and story creation by running independent tasks concurrently with Agent Teams."
+    }
+  ]
+}
