@@ -25,6 +25,11 @@ After completing instructions.xml step 4, prepare a base context block with all 
 - story_path: {{story_path}}
 - project_context: {resolved}
 - sprint_status: {resolved}
+
+## Required Reading
+Before starting work, read these files for implementation context:
+- {{story_path}} → "Dev Notes" section: architecture requirements, technical specs, edge cases
+- {project_context}: coding standards and project-wide patterns
 ```
 
 ### Pipeline Selection

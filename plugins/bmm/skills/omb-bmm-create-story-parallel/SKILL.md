@@ -30,6 +30,8 @@ After completing instructions.xml step 1, prepare a base context block with all 
 - story_id: {{story_id}}
 - story_title: {{story_title}}
 - sprint_status: {resolved}
+- communication_language: {resolved}
+- document_output_language: {resolved}
 ```
 
 ### Team Setup
@@ -82,6 +84,10 @@ You are tech-researcher of team "story-{{story_key}}".
 
 Read {installed_path}/instructions.xml and execute <step n="4"> exactly as written.
 Resolve all references using the workflow context below.
+
+Since step 3 (architecture analysis) runs concurrently, you cannot receive its output directly.
+To identify technologies for research, load the architecture document from {planning_artifacts} yourself
+and extract relevant libraries, frameworks, and APIs before proceeding with step 4's research tasks.
 
 {base context}
 

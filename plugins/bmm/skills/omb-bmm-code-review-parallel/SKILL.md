@@ -20,6 +20,7 @@ After completing instructions.xml step 2, prepare a base context block with all 
 ## Workflow Context
 - project-root: {resolved}
 - installed_path: {resolved}
+- planning_artifacts: {resolved}
 - implementation_artifacts: {resolved}
 - story_key: {{story_key}}
 - story_path: {{story_path}}
@@ -30,6 +31,12 @@ After completing instructions.xml step 2, prepare a base context block with all 
 - comprehensive_file_list: [union of story File List + git discovered files]
 - git_discrepancies: [story File List vs git reality, from step 1]
 - review_attack_plan: [step 2 output — extracted ACs, tasks with [x]/[ ] status, claimed changes, review plan]
+
+## Required Reading
+Before starting review work, read these files for review context:
+- {{story_path}}: full story content (ACs, tasks, Dev Agent Record, File List, Change Log)
+- {project_context}: coding standards and project-wide patterns
+- Architecture docs in {planning_artifacts}: for architectural violation detection
 ```
 
 ### Phase 1: Team Setup

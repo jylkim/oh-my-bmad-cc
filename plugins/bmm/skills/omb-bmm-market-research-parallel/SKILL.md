@@ -33,6 +33,10 @@ After completing step 1, prepare a base context block with all resolved workflow
 - Confirmed research scope and approach
 - Research document created at output_file with template contents
 - Scope confirmation section already appended to document
+
+## Required Reading
+Before starting research, read the scope confirmation section in output_file to understand
+the confirmed research scope and any user refinements from the Step 1 conversation.
 ```
 
 ### Team Setup
