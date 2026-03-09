@@ -47,9 +47,13 @@ Restart Claude Code after installation.
 
 Parallel pipeline skills for BMAD BMM workflows. Parallelizes story creation, story development (TDD), code review, and research (technical, market, domain) using concurrent Agent Teams.
 
+### [orch](plugins/orch/README.md)
+
+Pipeline orchestration skills for BMAD workflows. Automates multi-step story execution cycles by coordinating sequential workflow steps across BMM and TEA plugins.
+
 ## Roadmap
 
-Parallel/sub-agent skills for BMAD BMM workflows.
+### bmm — Parallel/sub-agent skills for BMAD BMM workflows
 
 - [x] **create-story parallel** — Parallelize artifact analysis, architecture analysis, and tech research with 3 concurrent agents.
 - [x] **dev-story parallel** — TDD pipeline with per-task parallelism based on dependency graph.
@@ -64,6 +68,12 @@ Parallel/sub-agent skills for BMAD BMM workflows.
 - [ ] **qa-generate-e2e-tests parallel** — Generate E2E tests per feature/epic area in parallel. Already an `autonomous: true` workflow.
 - [ ] **document-project parallel** — After project type detection, parallelize per-section documentation (API, data models, UI, tests, source tree).
 - [ ] **quick-spec isolated review** — Run adversarial review step in a fresh-context sub-agent to eliminate confirmation bias. Same pattern as quick-dev-isolated-review.
+
+### tea — Parallel skills for BMAD TEA workflows
+
+- [ ] **test-review parallel** — Run 4 independent quality evaluation dimensions (determinism, isolation, maintainability, performance) concurrently, then aggregate into report.
+- [ ] **automate parallel** — Run 2–3 test generation workers (API, E2E, backend) concurrently based on detected stack type.
+- [ ] **atdd parallel** — Run 2 independent test generation workers (API tests, E2E tests) concurrently, then aggregate output.
 
 ## Development Guide
 

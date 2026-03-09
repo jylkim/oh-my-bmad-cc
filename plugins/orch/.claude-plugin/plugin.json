@@ -1,0 +1,8 @@
+{
+  "name": "orch",
+  "description": "Pipeline orchestration skills for BMAD workflows",
+  "version": "0.1.0",
+  "author": {
+    "name": "jylkim"
+  }
+}

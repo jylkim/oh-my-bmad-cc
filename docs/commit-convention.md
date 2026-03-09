@@ -19,6 +19,7 @@ Follows [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/).
 ## Scope
 
 - `bmm` — Changes related to the bmm plugin
+- `orch` — Changes related to the orch plugin
 - Omitted — Changes unrelated to any plugin (root docs, marketplace config, etc.)
 
 ## Examples
