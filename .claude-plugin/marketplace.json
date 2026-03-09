@@ -13,6 +13,11 @@
       "description": "Parallel pipeline skills for BMAD BMM workflows. Speeds up story development, code review, and story creation by running independent tasks concurrently with Agent Teams."
     },
     {
+      "name": "tea",
+      "source": "./plugins/tea",
+      "description": "Parallel pipeline skills for BMAD TEA workflows. Speeds up test generation (ATDD, automate) and test quality review by running independent tasks concurrently with Agent Teams."
+    },
+    {
       "name": "orch",
       "source": "./plugins/orch",
       "description": "Pipeline orchestration skills for BMAD workflows. Automates multi-step story execution cycles by coordinating sequential workflow steps across BMM and TEA plugins."

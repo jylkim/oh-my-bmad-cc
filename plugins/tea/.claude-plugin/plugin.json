@@ -1,0 +1,8 @@
+{
+  "name": "tea",
+  "description": "Parallel pipeline skills for BMAD TEA workflows",
+  "version": "0.1.0",
+  "author": {
+    "name": "jylkim"
+  }
+}
