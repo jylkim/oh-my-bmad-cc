@@ -72,7 +72,7 @@ Teammate runs: `/bmad-tea-testarch-test-review {STORY_ID} yolo`
 
 ### Step 7: Code Simplification
 Depends on Step 6 (or Step 5 if Step 6 was skipped).
-Spawn teammates with `/simplify` to review the code modified during this story development. After review, spawn another teammate (sonnet) to apply the suggested changes.
+The **coordinator directly** invokes `/simplify` (Phase 1–2 only: identify changes and launch three review agents). After the review agents complete, spawn a teammate (sonnet) to apply the suggested changes — pass the aggregated findings as context.
 
 ### Step 8: Commit
 After all previous steps complete, the **coordinator directly** (not a teammate) performs the final commit:
