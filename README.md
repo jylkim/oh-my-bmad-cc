@@ -66,12 +66,12 @@ Pipeline orchestration skills for BMAD workflows. Automates multi-step story exe
 - [x] **market-research parallel** — Run 4 research dimensions (behavior, pain points, decisions, competitive) concurrently.
 - [x] **domain-research parallel** — Run 4 research dimensions (industry, competitive, regulatory, technical trends) concurrently.
 - [x] **quick-dev isolated review** — Run adversarial review in a fresh-context sub-agent to eliminate confirmation bias.
+- [x] **quick-spec isolated review** — Run adversarial review step in a fresh-context sub-agent to eliminate confirmation bias. Same pattern as quick-dev-isolated-review.
 - [ ] **validate-prd parallel** — Run 10 independent validation dimensions (density, brief coverage, measurability, traceability, etc.) concurrently against the same PRD document. Same pattern as code-review-parallel.
 - [ ] **check-implementation-readiness parallel** — Parallelize 3 independent validation analyses (FR coverage, UX alignment, epic quality) after requirement extraction, then aggregate into readiness report.
 - [ ] **create-epics-and-stories parallel** — After epic list approval, generate stories per epic concurrently with dedicated sub-agents.
 - [ ] **qa-generate-e2e-tests parallel** — Generate E2E tests per feature/epic area in parallel. Already an `autonomous: true` workflow.
 - [ ] **document-project parallel** — After project type detection, parallelize per-section documentation (API, data models, UI, tests, source tree).
-- [ ] **quick-spec isolated review** — Run adversarial review step in a fresh-context sub-agent to eliminate confirmation bias. Same pattern as quick-dev-isolated-review.
 
 ### tea — Parallel skills for BMAD TEA workflows
 

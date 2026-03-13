@@ -102,6 +102,18 @@ Four research agents run simultaneously:
 
 Agents report key findings summaries; team lead coordinates user [C] Continue approval. Upon approval, agents write directly to the document before shutdown.
 
+### [omb-bmm-quick-spec-isolated-review](skills/omb-bmm-quick-spec-isolated-review/SKILL.md)
+
+Context-isolated adversarial review for `bmad-bmm-quick-spec`. Overrides the [R] Adversarial Review option in step-04's Final Menu by spawning a separate agent with no spec-authoring context.
+
+The main agent runs steps 1–3 and step-04 Sections 1–3 normally, then when the user selects [R], hands the finalized spec to an isolated reviewer:
+
+| Role | Agent | Model | Focus |
+|------|-------|-------|-------|
+| Adversarial Reviewer | (foreground sub-agent) | Opus | Spec-only review with zero authoring context |
+
+The reviewer receives only the spec content and `review-adversarial-general.xml` — no conversation history, codebase investigation results, or decisions made during authoring. This eliminates confirmation bias from the spec author reviewing their own work. Findings are processed back by the main agent before returning to the Final Menu.
+
 ### [omb-bmm-quick-dev-isolated-review](skills/omb-bmm-quick-dev-isolated-review/SKILL.md)
 
 Context-isolated adversarial review for `bmad-bmm-quick-dev`. Overrides step 5 by spawning a separate agent with no implementation context.

@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.3.0] - 2026-03-13
+
+### Added
+- Context-isolated adversarial review skill for quick-spec (`omb-bmm-quick-spec-isolated-review`)
+
 ## [0.2.0] - 2026-03-09
 
 ### Added
