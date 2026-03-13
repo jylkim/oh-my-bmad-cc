@@ -5,7 +5,7 @@ description: 'Parallel pipeline execution of bmad-tea-testarch-atdd. Use when th
 
 <steps CRITICAL="TRUE">
 
-1. Read `{project-root}/.claude/commands/bmad-tea-testarch-atdd.md` and follow its instructions EXACTLY
+1. Read `{project-root}/.claude/skills/bmad-tea-testarch-atdd/SKILL.md` and follow its instructions EXACTLY
 2. When the workflow reaches step-file execution, execute steps 1–3 (preflight, mode selection, test strategy) as normal
 3. After step 3 completes, apply the **parallel execution override** below instead of loading step 4 (orchestration)
 4. After all parallel work completes, resume sequential execution from step 4c (aggregate) onward
