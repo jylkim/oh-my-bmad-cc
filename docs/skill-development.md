@@ -13,7 +13,7 @@ A skill **references** the original command/workflow and **overrides** only the 
 ```markdown
 <steps CRITICAL="TRUE">
 
-1. Read `{project-root}/.claude/commands/{command}.md` and follow its instructions EXACTLY
+1. Read `{project-root}/.claude/skills/{command}/SKILL.md` and follow its instructions EXACTLY
 2. When workflow.xml reaches instructions.xml execution, execute steps {sequential range} as normal
 3. After step {N}, apply the **parallel override** below instead of normal step {parallel target}
 4. After parallel work completes, resume sequential execution from instructions.xml step {resume point} onward
@@ -158,5 +158,5 @@ When creating or modifying a skill, update the plugin's `README.md` (e.g., `plug
 
 ## Reference Examples
 
-- `plugins/bmm/skills/omb-bmm-dev-story-parallel/` — 4-stage TDD pipeline, 2 branches (implementation + review continuation)
-- `plugins/bmm/skills/omb-bmm-quick-dev-isolated-review/` — single-agent context isolation (no team, foreground sub-agent)
+- `plugins/bmm/skills/omb-dev-story-parallel/` — 4-stage TDD pipeline, 2 branches (implementation + review continuation)
+- `plugins/bmm/skills/omb-quick-dev-isolated-review/` — single-agent context isolation (no team, foreground sub-agent)

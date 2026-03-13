@@ -42,7 +42,7 @@ Each plugin maintains its own `CHANGELOG.md` at `plugins/{plugin}/CHANGELOG.md`,
 ## [0.2.0] - 2026-03-10
 
 ### Added
-- Domain research parallel skill (`omb-bmm-domain-research-parallel`)
+- Domain research parallel skill (`omb-domain-research-parallel`)
 
 ### Fixed
 - Persona path resolution in all pipeline skills
