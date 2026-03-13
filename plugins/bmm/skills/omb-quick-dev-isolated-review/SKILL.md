@@ -78,7 +78,7 @@ Return your findings as a Markdown list with descriptions only, as specified by 
 **Included in the prompt:**
 - Adversarial reviewer persona
 - `{diff_output}` in full (literal content, not a reference)
-- Path to `review-adversarial-general.xml` (agent reads it directly)
+- Path to `bmad-review-adversarial-general/workflow.md` (agent reads it directly)
 - Path to `project-context.md` (if it exists)
 
 **Excluded from the prompt (context isolation):**

@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.4.0] - 2026-03-13
+
+### Changed
+- BMM 스킬 이름에서 `bmm-` 네임스페이스 제거 (`omb-bmm-*` → `omb-*`)
+- upstream 경로 `.claude/commands/` → `.claude/skills/` 마이그레이션
+- XML task 경로 → workflow.md 마이그레이션
+
 ## [0.3.0] - 2026-03-13
 
 ### Added

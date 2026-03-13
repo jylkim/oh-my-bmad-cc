@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.1.2] - 2026-03-13
+
+### Fixed
+- BMM 스킬 rename에 따른 slash command 레퍼런스 업데이트
+
 ## [0.1.1] - 2026-03-09
 
 ### Fixed
