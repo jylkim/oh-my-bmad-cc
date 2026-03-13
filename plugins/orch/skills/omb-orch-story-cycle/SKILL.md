@@ -20,7 +20,7 @@ Create Story → ATDD → Dev Story → Test Automation → Code Review → Test
 Before starting, verify required plugins are installed by checking available skills:
 
 **Required — BMad Method (bmm):**
-Steps 1, 3, 5 use `/bmad-bmm-*` skills. If bmm skills are not available, inform the user that BMad Method plugin must be installed and **stop the pipeline**.
+Steps 1, 3, 5 use `/bmad-create-story`, `/bmad-dev-story`, `/bmad-code-review` skills. If bmm skills are not available, inform the user that BMad Method plugin must be installed and **stop the pipeline**.
 
 **Optional — BMad Method Test Architect (tea):**
 Steps 2, 4, 6 use `/bmad-tea-*` skills. If tea skills are not available, **skip Steps 2, 4, and 6** and note them as skipped in the final summary. When TEA is unavailable, the rework flow always uses the MINOR path (Dev Story → Code Review only).
@@ -41,7 +41,7 @@ A step succeeds when its teammate completes without reporting errors.
 IMPORTANT: DO NOT ASK ANY QUESTION TO USER. This is an automated pipeline.
 
 ### Step 1: Create Story — model: **opus**
-Teammate runs: `/bmad-bmm-create-story {STORY_ID} yolo`
+Teammate runs: `/bmad-create-story {STORY_ID} yolo`
 > All artifacts exhaustive analysis + comprehensive story spec creation. Pipeline quality depends on this step.
 
 ### Step 2: ATDD Test Architecture — model: **opus**
@@ -51,7 +51,7 @@ Teammate runs: `/bmad-tea-testarch-atdd {STORY_ID} yolo`
 
 ### Step 3: Dev Story — model: **sonnet**
 Depends on Step 2 (or Step 1 if Step 2 was skipped).
-Teammate runs: `/bmad-bmm-dev-story {STORY_ID} yolo`
+Teammate runs: `/bmad-dev-story {STORY_ID} yolo`
 > Spec-driven implementation following tasks/subtasks exactly as written.
 
 ### Step 4: Test Automation — model: **sonnet**
@@ -61,8 +61,8 @@ Teammate runs: `/bmad-tea-testarch-automate {STORY_ID} yolo`
 
 ### Step 5: Code Review — model: **opus**
 Depends on Step 4 (or Step 3 if Step 4 was skipped).
-- Iterations 1–2: Teammate runs: `/bmad-bmm-code-review {STORY_ID} yolo, create action items for all the issues and classify each issue scope as MINOR, MODERATE, or SEVERE`
-- Iteration 3 (final): Teammate runs: `/bmad-bmm-code-review {STORY_ID} yolo, auto accept and fix all the issues`
+- Iterations 1–2: Teammate runs: `/bmad-code-review {STORY_ID} yolo, create action items for all the issues and classify each issue scope as MINOR, MODERATE, or SEVERE`
+- Iteration 3 (final): Teammate runs: `/bmad-code-review {STORY_ID} yolo, auto accept and fix all the issues`
 > Adversarial review: false claim detection, AC validation, security/performance analysis.
 
 ### Step 6: Test Review — model: **opus**

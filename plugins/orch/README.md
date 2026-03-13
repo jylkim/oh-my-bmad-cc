@@ -10,11 +10,11 @@ Automated story-level execution cycle with severity-based rework flow.
 
 | Step | Skill | Model | Required |
 |---|---|---|---|
-| 1. Create Story | `/bmad-bmm-create-story` | opus | bmm |
+| 1. Create Story | `/bmad-create-story` | opus | bmm |
 | 2. ATDD | `/bmad-tea-testarch-atdd` | opus | tea (optional) |
-| 3. Dev Story | `/bmad-bmm-dev-story` | sonnet | bmm |
+| 3. Dev Story | `/bmad-dev-story` | sonnet | bmm |
 | 4. Test Automation | `/bmad-tea-testarch-automate` | sonnet | tea (optional) |
-| 5. Code Review | `/bmad-bmm-code-review` | opus | bmm |
+| 5. Code Review | `/bmad-code-review` | opus | bmm |
 | 6. Test Review | `/bmad-tea-testarch-test-review` | opus | tea (optional) |
 | 7. Code Simplification | `/simplify` | — | built-in |
 | 8. Commit | coordinator | — | — |
