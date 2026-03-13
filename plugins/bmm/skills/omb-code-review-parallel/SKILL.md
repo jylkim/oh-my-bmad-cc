@@ -1,11 +1,11 @@
 ---
-name: omb-bmm-code-review-parallel
-description: 'Parallel pipeline execution of bmad-bmm-code-review. Use when the user says "parallel code review", "fast code review", "parallel review", or wants to speed up adversarial code review.'
+name: omb-code-review-parallel
+description: 'Parallel pipeline execution of bmad-code-review. Use when the user says "parallel code review", "fast code review", "parallel review", or wants to speed up adversarial code review.'
 ---
 
 <steps CRITICAL="TRUE">
 
-1. Read `{project-root}/.claude/commands/bmad-bmm-code-review.md` and follow its instructions EXACTLY
+1. Read `{project-root}/.claude/skills/bmad-code-review/SKILL.md` and follow its instructions EXACTLY
 2. When workflow.xml reaches instructions.xml execution, execute steps 1-2 (setup) as normal
 3. After step 2, apply the **parallel review override** below instead of normal step 3
 4. After parallel review completes with aggregated findings, resume sequential execution from instructions.xml step 4 onward

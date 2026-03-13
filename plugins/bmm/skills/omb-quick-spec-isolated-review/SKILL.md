@@ -1,11 +1,11 @@
 ---
-name: omb-bmm-quick-spec-isolated-review
+name: omb-quick-spec-isolated-review
 description: 'Quick Spec with isolated adversarial review. Use when the user says "isolated review quick spec", "unbiased review quick spec", or wants spec review by a separate context-free agent.'
 ---
 
 <steps CRITICAL="TRUE">
 
-1. Read `{project-root}/.claude/commands/bmad-bmm-quick-spec.md` and follow its instructions EXACTLY
+1. Read `{project-root}/.claude/skills/bmad-quick-spec/SKILL.md` and follow its instructions EXACTLY
 2. When workflow.md reaches step file execution, execute step-01 through step-03 as normal
 3. In step-04, execute Sections 1–3 as normal (present spec, handle feedback, finalize)
 4. In step-04 Section 4 Final Menu, when the user selects [R] Adversarial Review, apply the **isolated review override** below instead of the inline `<invoke-task>` process
@@ -42,7 +42,7 @@ spec document shows.
 
 ## Your Task
 
-Read `{project-root}/_bmad/core/tasks/review-adversarial-general.xml` and execute it fully, in order.
+Read `{project-root}/_bmad/core/tasks/bmad-review-adversarial-general/workflow.md` and execute it fully, in order.
 
 ## Inputs
 

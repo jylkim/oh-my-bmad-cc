@@ -1,11 +1,11 @@
 ---
-name: omb-bmm-create-story-parallel
-description: 'Parallelized version of bmad-bmm-create-story that uses an Agent Team for concurrent research steps. Steps 2, 3, 4 run in parallel, and teammates stay alive for follow-up refinement during step 5+. Use when the user says "parallel create story", "fast create story", "parallel story", or wants to speed up story creation.'
+name: omb-create-story-parallel
+description: 'Parallelized version of bmad-create-story that uses an Agent Team for concurrent research steps. Steps 2, 3, 4 run in parallel, and teammates stay alive for follow-up refinement during step 5+. Use when the user says "parallel create story", "fast create story", "parallel story", or wants to speed up story creation.'
 ---
 
 <steps CRITICAL="TRUE">
 
-1. Read `{project-root}/.claude/commands/bmad-bmm-create-story.md` and follow its instructions EXACTLY
+1. Read `{project-root}/.claude/skills/bmad-create-story/SKILL.md` and follow its instructions EXACTLY
 2. When workflow.xml reaches instructions.xml execution, execute step 1 (determine target story) as normal
 3. For instructions.xml steps 2, 3, 4: apply the **parallel execution override** below instead of sequential execution
 4. After all parallel agents complete, resume sequential execution from instructions.xml step 5 onward

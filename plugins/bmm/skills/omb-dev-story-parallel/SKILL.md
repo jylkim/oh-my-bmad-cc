@@ -1,11 +1,11 @@
 ---
-name: omb-bmm-dev-story-parallel
-description: 'Parallel pipeline execution of bmad-bmm-dev-story. Use when the user says "parallel dev story", "fast dev story", "parallel implement", or wants to speed up story development.'
+name: omb-dev-story-parallel
+description: 'Parallel pipeline execution of bmad-dev-story. Use when the user says "parallel dev story", "fast dev story", "parallel implement", or wants to speed up story development.'
 ---
 
 <steps CRITICAL="TRUE">
 
-1. Read `{project-root}/.claude/commands/bmad-bmm-dev-story.md` and follow its instructions EXACTLY
+1. Read `{project-root}/.claude/skills/bmad-dev-story/SKILL.md` and follow its instructions EXACTLY
 2. When workflow.xml reaches instructions.xml execution, execute steps 1-4 (setup) as normal
 3. After step 4, apply the **parallel execution override** below instead of the normal step 5-8 loop
 4. After all parallel work completes, resume sequential execution from instructions.xml step 9 onward

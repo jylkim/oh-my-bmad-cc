@@ -1,11 +1,11 @@
 ---
-name: omb-bmm-technical-research-parallel
-description: 'Parallelized version of bmad-bmm-technical-research that uses an Agent Team for concurrent research steps. Steps 2-5 run in parallel with 4 specialist agents, with follow-up deep-dives available before user approval. Use when the user says "parallel technical research", "fast technical research", "parallel research", or wants to speed up technical research.'
+name: omb-technical-research-parallel
+description: 'Parallelized version of bmad-technical-research that uses an Agent Team for concurrent research steps. Steps 2-5 run in parallel with 4 specialist agents, with follow-up deep-dives available before user approval. Use when the user says "parallel technical research", "fast technical research", "parallel research", or wants to speed up technical research.'
 ---
 
 <steps CRITICAL="TRUE">
 
-1. Read `{project-root}/.claude/commands/bmad-bmm-technical-research.md` and follow its instructions EXACTLY
+1. Read `{project-root}/.claude/skills/bmad-technical-research/SKILL.md` and follow its instructions EXACTLY
 2. Follow the workflow through CONFIGURATION, QUICK TOPIC DISCOVERY, and ROUTE TO TECHNICAL RESEARCH STEPS — execute step 1 (scope confirmation) as normal
 3. After step 1 completes, apply the **parallel execution override** below instead of loading step-02 sequentially
 4. When the user requests additional investigation on a specific area before [C] approval, route it to the relevant teammate instead of doing it yourself

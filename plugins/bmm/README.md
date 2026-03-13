@@ -4,9 +4,9 @@ Pipeline skills for BMAD BMM workflows. Parallelizes story creation, development
 
 ## Skills
 
-### [omb-bmm-create-story-parallel](skills/omb-bmm-create-story-parallel/SKILL.md)
+### [omb-create-story-parallel](skills/omb-create-story-parallel/SKILL.md)
 
-Parallelized execution of `bmad-bmm-create-story`. Overrides research steps (2–4) with 3 concurrent analysis agents.
+Parallelized execution of `bmad-create-story`. Overrides research steps (2–4) with 3 concurrent analysis agents.
 
 Three research agents run simultaneously:
 
@@ -18,9 +18,9 @@ Three research agents run simultaneously:
 
 Agents stay alive after initial research for follow-up questions during story authoring (step 5+).
 
-### [omb-bmm-dev-story-parallel](skills/omb-bmm-dev-story-parallel/SKILL.md)
+### [omb-dev-story-parallel](skills/omb-dev-story-parallel/SKILL.md)
 
-Parallelized execution of `bmad-bmm-dev-story`. Overrides implementation steps (5–8) with a concurrent TDD pipeline.
+Parallelized execution of `bmad-dev-story`. Overrides implementation steps (5–8) with a concurrent TDD pipeline.
 
 Two pipeline modes based on context:
 
@@ -42,9 +42,9 @@ Two pipeline modes based on context:
 
 Independent tasks/items run concurrently; dependent ones wait for upstream verification to pass.
 
-### [omb-bmm-code-review-parallel](skills/omb-bmm-code-review-parallel/SKILL.md)
+### [omb-code-review-parallel](skills/omb-code-review-parallel/SKILL.md)
 
-Parallelized execution of `bmad-bmm-code-review`. Overrides the review step (3) with 4 concurrent review dimensions.
+Parallelized execution of `bmad-code-review`. Overrides the review step (3) with 4 concurrent review dimensions.
 
 Four independent reviewers run simultaneously:
 
@@ -57,9 +57,9 @@ Four independent reviewers run simultaneously:
 
 Findings are aggregated, deduplicated, and categorized by severity after all reviewers complete.
 
-### [omb-bmm-technical-research-parallel](skills/omb-bmm-technical-research-parallel/SKILL.md)
+### [omb-technical-research-parallel](skills/omb-technical-research-parallel/SKILL.md)
 
-Parallelized execution of `bmad-bmm-technical-research`. Overrides research steps (2–5) with 4 concurrent specialist agents.
+Parallelized execution of `bmad-technical-research`. Overrides research steps (2–5) with 4 concurrent specialist agents.
 
 Four research agents run simultaneously:
 
@@ -72,9 +72,9 @@ Four research agents run simultaneously:
 
 Agents report key findings summaries; team lead coordinates user [C] Continue approval. Upon approval, agents write directly to the document before shutdown.
 
-### [omb-bmm-market-research-parallel](skills/omb-bmm-market-research-parallel/SKILL.md)
+### [omb-market-research-parallel](skills/omb-market-research-parallel/SKILL.md)
 
-Parallelized execution of `bmad-bmm-market-research`. Overrides research steps (2–5) with 4 concurrent specialist agents.
+Parallelized execution of `bmad-market-research`. Overrides research steps (2–5) with 4 concurrent specialist agents.
 
 Four research agents run simultaneously:
 
@@ -87,9 +87,9 @@ Four research agents run simultaneously:
 
 Agents report key findings summaries; team lead coordinates user [C] Continue approval. Upon approval, agents write directly to the document before shutdown.
 
-### [omb-bmm-domain-research-parallel](skills/omb-bmm-domain-research-parallel/SKILL.md)
+### [omb-domain-research-parallel](skills/omb-domain-research-parallel/SKILL.md)
 
-Parallelized execution of `bmad-bmm-domain-research`. Overrides research steps (2–5) with 4 concurrent specialist agents.
+Parallelized execution of `bmad-domain-research`. Overrides research steps (2–5) with 4 concurrent specialist agents.
 
 Four research agents run simultaneously:
 
@@ -102,9 +102,9 @@ Four research agents run simultaneously:
 
 Agents report key findings summaries; team lead coordinates user [C] Continue approval. Upon approval, agents write directly to the document before shutdown.
 
-### [omb-bmm-quick-spec-isolated-review](skills/omb-bmm-quick-spec-isolated-review/SKILL.md)
+### [omb-quick-spec-isolated-review](skills/omb-quick-spec-isolated-review/SKILL.md)
 
-Context-isolated adversarial review for `bmad-bmm-quick-spec`. Overrides the [R] Adversarial Review option in step-04's Final Menu by spawning a separate agent with no spec-authoring context.
+Context-isolated adversarial review for `bmad-quick-spec`. Overrides the [R] Adversarial Review option in step-04's Final Menu by spawning a separate agent with no spec-authoring context.
 
 The main agent runs steps 1–3 and step-04 Sections 1–3 normally, then when the user selects [R], hands the finalized spec to an isolated reviewer:
 
@@ -112,11 +112,11 @@ The main agent runs steps 1–3 and step-04 Sections 1–3 normally, then when t
 |------|-------|-------|-------|
 | Adversarial Reviewer | (foreground sub-agent) | Opus | Spec-only review with zero authoring context |
 
-The reviewer receives only the spec content and `review-adversarial-general.xml` — no conversation history, codebase investigation results, or decisions made during authoring. This eliminates confirmation bias from the spec author reviewing their own work. Findings are processed back by the main agent before returning to the Final Menu.
+The reviewer receives only the spec content and `bmad-review-adversarial-general/workflow.md` — no conversation history, codebase investigation results, or decisions made during authoring. This eliminates confirmation bias from the spec author reviewing their own work. Findings are processed back by the main agent before returning to the Final Menu.
 
-### [omb-bmm-quick-dev-isolated-review](skills/omb-bmm-quick-dev-isolated-review/SKILL.md)
+### [omb-quick-dev-isolated-review](skills/omb-quick-dev-isolated-review/SKILL.md)
 
-Context-isolated adversarial review for `bmad-bmm-quick-dev`. Overrides step 5 by spawning a separate agent with no implementation context.
+Context-isolated adversarial review for `bmad-quick-dev`. Overrides step 5 by spawning a separate agent with no implementation context.
 
 The main agent runs steps 1–4 normally, then constructs a diff and hands it to an isolated reviewer:
 
@@ -124,4 +124,4 @@ The main agent runs steps 1–4 normally, then constructs a diff and hands it to
 |------|-------|-------|-------|
 | Adversarial Reviewer | (foreground sub-agent) | Opus | Diff-only review with zero implementation context |
 
-The reviewer receives only the diff and `review-adversarial-general.xml` — no plans, decisions, or self-check results. This eliminates confirmation bias from the implementing agent reviewing its own work. Findings are processed back by the main agent before resuming step 6.
+The reviewer receives only the diff and `bmad-review-adversarial-general/workflow.md` — no plans, decisions, or self-check results. This eliminates confirmation bias from the implementing agent reviewing its own work. Findings are processed back by the main agent before resuming step 6.

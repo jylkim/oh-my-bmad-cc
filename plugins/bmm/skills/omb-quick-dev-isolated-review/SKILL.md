@@ -1,11 +1,11 @@
 ---
-name: omb-bmm-quick-dev-isolated-review
+name: omb-quick-dev-isolated-review
 description: 'Quick Dev with isolated adversarial review. Use when the user says "isolated review quick dev", "unbiased review quick dev", or wants implementation review by a separate context-free agent.'
 ---
 
 <steps CRITICAL="TRUE">
 
-1. Read `{project-root}/.claude/commands/bmad-bmm-quick-dev.md` and follow its instructions EXACTLY
+1. Read `{project-root}/.claude/skills/bmad-quick-dev/SKILL.md` and follow its instructions EXACTLY
 2. When workflow.md reaches step file execution, execute step-01 through step-04 as normal
 3. After step-04 completes, apply the **isolated review override** below instead of normal step-05
 4. After the override completes, load and follow step-06-resolve-findings.md as normal
@@ -58,7 +58,7 @@ what alternatives were considered, or what the implementation plan was. You judg
 
 ## Your Task
 
-Read `{project-root}/_bmad/core/tasks/review-adversarial-general.xml` and execute it fully, in order.
+Read `{project-root}/_bmad/core/tasks/bmad-review-adversarial-general/workflow.md` and execute it fully, in order.
 
 ## Inputs
 
