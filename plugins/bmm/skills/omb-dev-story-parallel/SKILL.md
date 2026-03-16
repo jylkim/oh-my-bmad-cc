@@ -45,3 +45,28 @@ Check `review_continuation` from instructions.xml step 3:
   This is a lightweight 2-stage pipeline: Fix (refactorer) → Verify, for addressing `[AI-Review]` action items.
 
 Both pipelines end with integration validation, then return here to resume instructions.xml step 9.
+
+## Next Step Handoff
+
+After instructions.xml step 9 completes, use **AskUserQuestion** to present next steps.
+
+**If TEA is available** (`/omb-tea-testarch-automate-parallel` skill exists):
+
+**Question:** "Dev Story implementation complete. Proceed to Test Automation?"
+
+**Options:**
+1. **Proceed to Test Automation** — Run `/omb-tea-testarch-automate-parallel`
+2. **Skip to Code Review** — Run `/omb-code-review-parallel`
+3. **Continue reviewing** — Stay in current context for further review
+4. **Done for now** — End pipeline
+
+**If TEA is unavailable:**
+
+**Question:** "Dev Story implementation complete. Proceed to Code Review?"
+
+**Options:**
+1. **Proceed to Code Review** — Run `/omb-code-review-parallel`
+2. **Continue reviewing** — Stay in current context for further review
+3. **Done for now** — End pipeline
+
+If user selects a skill option, invoke the corresponding slash command.

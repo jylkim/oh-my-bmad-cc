@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.5.0] - 2026-03-16
+
+### Added
+- Next Step Handoff to pipeline skills — auto-suggests the next skill on completion via AskUserQuestion
+  - `omb-create-story-parallel`: suggests ATDD (TEA) or Dev Story
+  - `omb-dev-story-parallel`: suggests Test Automation (TEA) or Code Review
+  - `omb-code-review-parallel`: suggests Test Review / Simplify on pass, rework path on failure (severity-based)
+
 ## [0.4.0] - 2026-03-13
 
 ### Changed

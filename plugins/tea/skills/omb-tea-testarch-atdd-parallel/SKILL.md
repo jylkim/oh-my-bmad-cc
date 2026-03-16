@@ -109,3 +109,16 @@ After both teammates complete:
 ## Final Phase: Cleanup
 
 After step 5 completes, request all teammates to shut down gracefully. Clean up the team and its task list.
+
+## Next Step Handoff
+
+After cleanup, use **AskUserQuestion** to present next steps:
+
+**Question:** "ATDD test design complete. Proceed to Dev Story implementation?"
+
+**Options:**
+1. **Proceed to Dev Story** — Run `/omb-dev-story-parallel`
+2. **Continue reviewing** — Stay in current context for further review
+3. **Done for now** — End pipeline
+
+If user selects the first option, invoke the slash command.

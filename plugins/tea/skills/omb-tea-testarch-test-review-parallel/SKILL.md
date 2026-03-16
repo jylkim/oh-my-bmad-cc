@@ -143,3 +143,16 @@ After all four teammates complete:
 ## Final Phase: Cleanup
 
 After step 4 completes, request all teammates to shut down gracefully. Clean up the team and its task list.
+
+## Next Step Handoff
+
+After cleanup, use **AskUserQuestion** to present next steps:
+
+**Question:** "Test Review complete. Proceed to Simplify & Commit?"
+
+**Options:**
+1. **Simplify & Commit** — Run `/simplify` then commit
+2. **Continue reviewing** — Stay in current context for further review
+3. **Done for now** — End pipeline
+
+If user selects the first option, invoke `/simplify`.

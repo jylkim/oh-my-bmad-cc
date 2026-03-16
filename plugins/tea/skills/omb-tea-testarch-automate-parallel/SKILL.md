@@ -137,3 +137,16 @@ After all launched teammates complete:
 ## Final Phase: Cleanup
 
 After step 4 completes, request all teammates to shut down gracefully. Clean up the team and its task list.
+
+## Next Step Handoff
+
+After cleanup, use **AskUserQuestion** to present next steps:
+
+**Question:** "Test Automation complete. Proceed to Code Review?"
+
+**Options:**
+1. **Proceed to Code Review** — Run `/omb-code-review-parallel`
+2. **Continue reviewing** — Stay in current context for further review
+3. **Done for now** — End pipeline
+
+If user selects the first option, invoke the slash command.

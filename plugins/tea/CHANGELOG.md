@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.2.0] - 2026-03-16
+
+### Added
+- Next Step Handoff to pipeline skills — auto-suggests the next skill on completion via AskUserQuestion
+  - `omb-tea-testarch-atdd-parallel`: suggests Dev Story
+  - `omb-tea-testarch-automate-parallel`: suggests Code Review
+  - `omb-tea-testarch-test-review-parallel`: suggests Simplify & Commit
+
 ## [0.1.1] - 2026-03-13
 
 ### Fixed
