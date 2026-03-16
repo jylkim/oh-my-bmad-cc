@@ -1,22 +1,50 @@
 ---
 name: omb-create-story-parallel
-description: 'Parallelized version of bmad-create-story that uses an Agent Team for concurrent research steps. Steps 2, 3, 4 run in parallel, and teammates stay alive for follow-up refinement during step 5+. Use when the user says "parallel create story", "fast create story", "parallel story", or wants to speed up story creation.'
+description: 'Parallelized version of bmad-create-story that uses an Agent Team for concurrent research steps. Includes scope discovery after artifact analysis to narrow development goals before parallel research. Use when the user says "parallel create story", "fast create story", "parallel story", or wants to speed up story creation.'
 ---
 
 <steps CRITICAL="TRUE">
 
 1. Read `{project-root}/.claude/skills/bmad-create-story/SKILL.md` and follow its instructions EXACTLY
 2. When workflow.xml reaches instructions.xml execution, execute step 1 (determine target story) as normal
-3. For instructions.xml steps 2, 3, 4: apply the **parallel execution override** below instead of sequential execution
-4. After all parallel agents complete, resume sequential execution from instructions.xml step 5 onward
-5. When the user requests additional investigation on a specific area, route it to the relevant teammate instead of doing it yourself
-6. After step 6 completes, shut down teammates and clean up the team
+3. Execute instructions.xml step 2 (artifact analysis) as normal — team lead does this directly
+4. After step 2, run **Scope Discovery** below to narrow development goals with the user
+5. After scope discovery, apply the **parallel execution override** below instead of sequential steps 3, 4
+6. After all parallel agents complete, resume sequential execution from instructions.xml step 5 onward
+7. When the user requests additional investigation on a specific area, route it to the relevant teammate instead of doing it yourself
+8. After step 6 completes, shut down teammates and clean up the team
 
 </steps>
 
+## Scope Discovery
+
+After completing instructions.xml step 2, review the extracted requirements, constraints, and dependencies. Assess whether the story scope is clear enough to proceed directly to research.
+
+**Signals that scope is clear — skip to parallel research:**
+- Story has specific, unambiguous acceptance criteria
+- Dependencies and constraints are well-defined
+- Development approach is obvious from the artifacts
+
+**Signals that scope needs narrowing:**
+- Multiple reasonable interpretations of what to build
+- Acceptance criteria are vague or overly broad
+- Trade-offs exist that affect the research direction
+
+When scope needs narrowing, engage the user with targeted questions:
+
+- Ask **one question at a time** — do not overwhelm with multiple questions
+- **Prefer multiple choice** when natural options exist (e.g., "Should this story cover: (a) only the API layer, (b) API + basic UI, or (c) full stack including tests?")
+- **Start broad, then narrow** — confirm the core intent first, then refine constraints
+- **Validate assumptions explicitly** — "The PRD mentions X, but the epic description says Y. Which takes priority?"
+- **Ground questions in artifact analysis results** — reference specific requirements, dependencies, or ambiguities discovered in step 2
+
+**Exit condition:** Proceed when development goals are clear enough to guide research, OR the user says "proceed" / "let's move on".
+
+Capture the confirmed scope as a concise summary (3-5 bullet points) for inclusion in the base context.
+
 ## Parallel Execution Override
 
-After completing instructions.xml step 1, prepare a base context block:
+After scope discovery, prepare a base context block:
 
 ```
 ## Workflow Context
@@ -33,10 +61,16 @@ After completing instructions.xml step 1, prepare a base context block:
 - communication_language: {resolved}
 - document_output_language: {resolved}
 
-## Step 1 Outputs
+## Step 1-2 Outputs
 - Target story identifier, title, and description from the epic list
 - Epic context and story position within the epic
-- Any constraints or prerequisites identified during story selection
+- Key requirements and acceptance criteria extracted from planning artifacts
+- Dependencies and constraints discovered
+
+## Scope Discovery Outputs
+- Confirmed development goals (the 3-5 bullet summary)
+- Any scope exclusions or deferrals agreed with the user
+- Priority trade-offs resolved during discovery
 ```
 
 ## Teammate Personas
@@ -47,34 +81,14 @@ Persona files are in `references/personas/` (relative to the skill root). Before
 
 Create a team named `story-{{story_key}}`.
 
-Create tracked tasks for each research dimension, plus an aggregate task that depends on all three completing:
-- **artifact-analysis**: "Planning artifact review"
+Create tracked tasks for each research dimension, plus an aggregate task that depends on both completing:
 - **architecture-analysis**: "Codebase pattern analysis"
 - **tech-research**: "Technical approach research"
-- **aggregate**: "Synthesize research results for story drafting" (blocked by the above three)
+- **aggregate**: "Synthesize research results for story drafting" (blocked by the above two)
 
 ## Phase 2: Parallel Research
 
-Spawn ALL 3 teammates in a single message:
-
-Spawn **artifact-analyst** as a background teammate (model: **opus**)
-
-```
-{persona from references/personas/artifact-analyst.yaml}
-You are artifact-analyst of team "story-{{story_key}}".
-Your task: artifact-analysis
-
-Read {installed_path}/instructions.xml and execute the following ONLY:
-- <step n="2">
-
-{base context}
-
-When complete, mark artifact-analysis as completed and report to team-lead with:
-- Key requirements and acceptance criteria extracted
-- Dependencies and constraints discovered
-- Cross-references to other stories or epics
-Then go idle — you may receive follow-up requests for deeper investigation.
-```
+Spawn BOTH teammates in a single message:
 
 Spawn **architecture-analyst** as a background teammate (model: **sonnet**)
 
@@ -118,9 +132,9 @@ When complete, mark tech-research as completed and report to team-lead with:
 Then go idle — you may receive follow-up requests for deeper investigation.
 ```
 
-## Phase 3: Sequential Resumption
+## Phase 3: Story Drafting
 
-After all 3 teammates complete (aggregate task unblocks), use their analyses as input context for instructions.xml step 5 onward.
+After both teammates complete (aggregate task unblocks), use their analyses as input context for instructions.xml step 5 onward.
 
 If the user requests additional investigation on a specific area during step 5+:
 - Route the request to the relevant teammate (e.g., architecture questions → **architecture-analyst**)

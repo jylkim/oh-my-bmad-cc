@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.6.0] - 2026-03-16
+
+### Added
+- Scope Discovery phase in `omb-create-story-parallel` — narrows development goals with the user after artifact analysis, before parallel research
+
+### Changed
+- `omb-create-story-parallel`: artifact analysis now runs sequentially by team lead; parallel agents reduced to 2 (architecture + tech research)
+- `omb-create-story-parallel`: removed `artifact-analyst` persona (no longer spawned as teammate)
+
 ## [0.5.1] - 2026-03-16
 
 ### Changed
