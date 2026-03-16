@@ -39,24 +39,31 @@ Before starting research, read the scope confirmation section in output_file to 
 the confirmed research scope and any user refinements from the Step 1 conversation.
 ```
 
-### Team Setup
-
-Create a team named `domain-research`.
-
-### Teammate Personas
+## Teammate Personas
 
 Persona files are in `references/personas/` (relative to the skill root). Before constructing each spawn prompt, read the corresponding persona YAML and include its `persona` block as the agent's identity at the top of the prompt.
 
-### Parallel Research
+## Phase 1: Team Setup
 
-Spawn ALL 4 teammates in a single message as background agents:
+Create a team named `domain-research`.
 
-**industry-analyst** — Step 2, model: **sonnet**
+Create tracked tasks for each research dimension, plus an aggregate task that depends on all four completing:
+- **industry-analysis**: "Industry Analysis research"
+- **competitive-analysis**: "Competitive Landscape Analysis research"
+- **regulatory-analysis**: "Regulatory and Compliance Analysis research"
+- **technical-trends-analysis**: "Technical Trends Analysis research"
+- **aggregate**: "Assemble content and finalize document" (blocked by the above four)
+
+## Phase 2: Parallel Research
+
+Spawn ALL 4 teammates in a single message:
+
+Spawn **industry-analyst** as a background teammate (model: **sonnet**)
 
 ```
 {persona from references/personas/industry-analyst.yaml}
 You are industry-analyst of team "domain-research".
-Your task: Industry Analysis
+Your task: industry-analysis
 
 Read {steps_path}/step-02-domain-analysis.md and conduct the Industry Analysis research.
 Do the web searches specified in the step and produce the content sections as defined in "Content Structure".
@@ -65,7 +72,7 @@ Do not present [C] Continue to the user directly — the team lead will coordina
 
 {base context}
 
-When complete, report to team-lead with:
+When complete, mark industry-analysis as completed and report to team-lead with:
 - Key findings summary (3-5 bullet points)
 - A request for user [C] Continue approval
 
@@ -73,12 +80,12 @@ Then go idle — you may receive follow-up requests for deeper investigation bef
 After team-lead relays user approval, append your full research content to the output_file and report completion.
 ```
 
-**competitive-analyst** — Step 3, model: **sonnet**
+Spawn **competitive-analyst** as a background teammate (model: **sonnet**)
 
 ```
 {persona from references/personas/competitive-analyst.yaml}
 You are competitive-analyst of team "domain-research".
-Your task: Competitive Landscape Analysis
+Your task: competitive-analysis
 
 Read {steps_path}/step-03-competitive-landscape.md and conduct the Competitive Landscape research.
 Do the web searches specified in the step and produce the content sections as defined in "Content Structure".
@@ -87,7 +94,7 @@ Do not present [C] Continue to the user directly — the team lead will coordina
 
 {base context}
 
-When complete, report to team-lead with:
+When complete, mark competitive-analysis as completed and report to team-lead with:
 - Key findings summary (3-5 bullet points)
 - A request for user [C] Continue approval
 
@@ -95,12 +102,12 @@ Then go idle — you may receive follow-up requests for deeper investigation bef
 After team-lead relays user approval, append your full research content to the output_file and report completion.
 ```
 
-**regulatory-analyst** — Step 4, model: **sonnet**
+Spawn **regulatory-analyst** as a background teammate (model: **sonnet**)
 
 ```
 {persona from references/personas/regulatory-analyst.yaml}
 You are regulatory-analyst of team "domain-research".
-Your task: Regulatory and Compliance Analysis
+Your task: regulatory-analysis
 
 Read {steps_path}/step-04-regulatory-focus.md and conduct the Regulatory Focus research.
 Do the web searches specified in the step and produce the content sections as defined in "Content Structure".
@@ -109,7 +116,7 @@ Do not present [C] Continue to the user directly — the team lead will coordina
 
 {base context}
 
-When complete, report to team-lead with:
+When complete, mark regulatory-analysis as completed and report to team-lead with:
 - Key findings summary (3-5 bullet points)
 - A request for user [C] Continue approval
 
@@ -117,12 +124,12 @@ Then go idle — you may receive follow-up requests for deeper investigation bef
 After team-lead relays user approval, append your full research content to the output_file and report completion.
 ```
 
-**technical-trends-analyst** — Step 5, model: **sonnet**
+Spawn **technical-trends-analyst** as a background teammate (model: **sonnet**)
 
 ```
 {persona from references/personas/technical-trends-analyst.yaml}
 You are technical-trends-analyst of team "domain-research".
-Your task: Technical Trends Analysis
+Your task: technical-trends-analysis
 
 Read {steps_path}/step-05-technical-trends.md and conduct the Technical Trends research.
 Do the web searches specified in the step and produce the content sections as defined in "Content Structure".
@@ -131,7 +138,7 @@ Do not present [C] Continue to the user directly — the team lead will coordina
 
 {base context}
 
-When complete, report to team-lead with:
+When complete, mark technical-trends-analysis as completed and report to team-lead with:
 - Key findings summary (3-5 bullet points)
 - A request for user [C] Continue approval
 
@@ -139,16 +146,17 @@ Then go idle — you may receive follow-up requests for deeper investigation bef
 After team-lead relays user approval, append your full research content to the output_file and report completion.
 ```
 
-### Content Assembly
+## Phase 3: Content Assembly
 
-After all 4 teammates report their key findings summaries:
+After all 4 teammates complete (aggregate task unblocks):
 
 1. Present the combined key findings to the user with [C] Continue
 2. If the user requests additional investigation before approving, route to the relevant teammate (e.g., regulatory questions → **regulatory-analyst**) — the teammate retains its original research context and can dig deeper immediately
 3. If the user approves, relay approval to each teammate in step order (2 → 3 → 4 → 5) so they write their content to the document
 4. After all writes complete, update frontmatter: `stepsCompleted: [1, 2, 3, 4, 5]`
-5. Shut down all teammates and clean up the team
 
-### Resuming Sequential Execution
+## Final Phase: Cleanup
+
+Shut down all teammates and clean up the team and its task list.
 
 After cleanup, load step-06-research-synthesis.md and execute it normally to produce the final comprehensive document.

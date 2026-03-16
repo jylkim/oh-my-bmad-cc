@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.5.1] - 2026-03-16
+
+### Changed
+- Standardize all parallel skills to Phase structure with tracked tasks and aggregate dependencies
+- Unify spawn prompt format, task completion marking, and heading levels across all pipeline skills
+
 ## [0.5.0] - 2026-03-16
 
 ### Added

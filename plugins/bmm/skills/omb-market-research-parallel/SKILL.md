@@ -39,24 +39,31 @@ Before starting research, read the scope confirmation section in output_file to 
 the confirmed research scope and any user refinements from the Step 1 conversation.
 ```
 
-### Team Setup
-
-Create a team named `market-research`.
-
-### Teammate Personas
+## Teammate Personas
 
 Persona files are in `references/personas/` (relative to the skill root). Before constructing each spawn prompt, read the corresponding persona YAML and include its `persona` block as the agent's identity at the top of the prompt.
 
-### Parallel Research
+## Phase 1: Team Setup
 
-Spawn ALL 4 teammates in a single message as background agents:
+Create a team named `market-research`.
 
-**customer-behavior-analyst** — Step 2, model: **sonnet**
+Create tracked tasks for each research dimension, plus an aggregate task that depends on all four completing:
+- **customer-behavior-analysis**: "Customer Behavior and Segments Analysis research"
+- **pain-points-analysis**: "Customer Pain Points and Needs Analysis research"
+- **decision-journey-analysis**: "Customer Decisions and Journey Analysis research"
+- **competitive-analysis**: "Competitive Analysis research"
+- **aggregate**: "Assemble content and finalize document" (blocked by the above four)
+
+## Phase 2: Parallel Research
+
+Spawn ALL 4 teammates in a single message:
+
+Spawn **customer-behavior-analyst** as a background teammate (model: **sonnet**)
 
 ```
 {persona from references/personas/customer-behavior-analyst.yaml}
 You are customer-behavior-analyst of team "market-research".
-Your task: Customer Behavior and Segments Analysis
+Your task: customer-behavior-analysis
 
 Read {steps_path}/step-02-customer-behavior.md and conduct the Customer Behavior and Segments research.
 Do the web searches specified in the step and produce the content sections as defined in "Content Structure".
@@ -65,7 +72,7 @@ Do not present [C] Continue to the user directly — the team lead will coordina
 
 {base context}
 
-When complete, report to team-lead with:
+When complete, mark customer-behavior-analysis as completed and report to team-lead with:
 - Key findings summary (3-5 bullet points)
 - A request for user [C] Continue approval
 
@@ -73,12 +80,12 @@ Then go idle — you may receive follow-up requests for deeper investigation bef
 After team-lead relays user approval, append your full research content to the output_file and report completion.
 ```
 
-**pain-points-analyst** — Step 3, model: **sonnet**
+Spawn **pain-points-analyst** as a background teammate (model: **sonnet**)
 
 ```
 {persona from references/personas/pain-points-analyst.yaml}
 You are pain-points-analyst of team "market-research".
-Your task: Customer Pain Points and Needs Analysis
+Your task: pain-points-analysis
 
 Read {steps_path}/step-03-customer-pain-points.md and conduct the Customer Pain Points and Needs research.
 Do the web searches specified in the step and produce the content sections as defined in "Content Structure".
@@ -87,7 +94,7 @@ Do not present [C] Continue to the user directly — the team lead will coordina
 
 {base context}
 
-When complete, report to team-lead with:
+When complete, mark pain-points-analysis as completed and report to team-lead with:
 - Key findings summary (3-5 bullet points)
 - A request for user [C] Continue approval
 
@@ -95,12 +102,12 @@ Then go idle — you may receive follow-up requests for deeper investigation bef
 After team-lead relays user approval, append your full research content to the output_file and report completion.
 ```
 
-**decision-journey-analyst** — Step 4, model: **sonnet**
+Spawn **decision-journey-analyst** as a background teammate (model: **sonnet**)
 
 ```
 {persona from references/personas/decision-journey-analyst.yaml}
 You are decision-journey-analyst of team "market-research".
-Your task: Customer Decisions and Journey Analysis
+Your task: decision-journey-analysis
 
 Read {steps_path}/step-04-customer-decisions.md and conduct the Customer Decisions and Journey research.
 Do the web searches specified in the step and produce the content sections as defined in "Content Structure".
@@ -109,7 +116,7 @@ Do not present [C] Continue to the user directly — the team lead will coordina
 
 {base context}
 
-When complete, report to team-lead with:
+When complete, mark decision-journey-analysis as completed and report to team-lead with:
 - Key findings summary (3-5 bullet points)
 - A request for user [C] Continue approval
 
@@ -117,12 +124,12 @@ Then go idle — you may receive follow-up requests for deeper investigation bef
 After team-lead relays user approval, append your full research content to the output_file and report completion.
 ```
 
-**competitive-analyst** — Step 5, model: **sonnet**
+Spawn **competitive-analyst** as a background teammate (model: **sonnet**)
 
 ```
 {persona from references/personas/competitive-analyst.yaml}
 You are competitive-analyst of team "market-research".
-Your task: Competitive Analysis
+Your task: competitive-analysis
 
 Read {steps_path}/step-05-competitive-analysis.md and conduct the Competitive Analysis research.
 Do the web searches specified in the step and produce the content sections as defined in "Content Structure".
@@ -131,7 +138,7 @@ Do not present [C] Continue to the user directly — the team lead will coordina
 
 {base context}
 
-When complete, report to team-lead with:
+When complete, mark competitive-analysis as completed and report to team-lead with:
 - Key findings summary (3-5 bullet points)
 - A request for user [C] Continue approval
 
@@ -139,16 +146,17 @@ Then go idle — you may receive follow-up requests for deeper investigation bef
 After team-lead relays user approval, append your full research content to the output_file and report completion.
 ```
 
-### Content Assembly
+## Phase 3: Content Assembly
 
-After all 4 teammates report their key findings summaries:
+After all 4 teammates complete (aggregate task unblocks):
 
 1. Present the combined key findings to the user with [C] Continue
 2. If the user requests additional investigation before approving, route to the relevant teammate (e.g., competitive questions → **competitive-analyst**) — the teammate retains its original research context and can dig deeper immediately
 3. If the user approves, relay approval to each teammate in step order (2 → 3 → 4 → 5) so they write their content to the document
 4. After all writes complete, update frontmatter: `stepsCompleted: [1, 2, 3, 4, 5]`
-5. Shut down all teammates and clean up the team
 
-### Resuming Sequential Execution
+## Final Phase: Cleanup
+
+Shut down all teammates and clean up the team and its task list.
 
 After cleanup, load step-06-research-completion.md and execute it normally to produce the final comprehensive document.

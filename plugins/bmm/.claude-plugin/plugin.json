@@ -1,7 +1,7 @@
 {
   "name": "bmm",
   "description": "Parallel pipeline skills for BMAD BMM workflows",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "author": {
     "name": "jylkim"
   }

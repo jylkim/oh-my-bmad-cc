@@ -39,24 +39,31 @@ Before starting research, read the scope confirmation section in output_file to 
 the confirmed research scope and any user refinements from the Step 1 conversation.
 ```
 
-### Team Setup
-
-Create a team named `tech-research`.
-
-### Teammate Personas
+## Teammate Personas
 
 Persona files are in `references/personas/` (relative to the skill root). Before constructing each spawn prompt, read the corresponding persona YAML and include its `persona` block as the agent's identity at the top of the prompt.
 
-### Parallel Research
+## Phase 1: Team Setup
 
-Spawn ALL 4 teammates in a single message as background agents:
+Create a team named `tech-research`.
 
-**tech-stack-analyst** — Step 2, model: **sonnet**
+Create tracked tasks for each research dimension, plus an aggregate task that depends on all four completing:
+- **tech-stack-analysis**: "Technology Stack Analysis research"
+- **integration-analysis**: "Integration Patterns Analysis research"
+- **architecture-analysis**: "Architectural Patterns Analysis research"
+- **implementation-research**: "Implementation Research"
+- **aggregate**: "Assemble content and finalize document" (blocked by the above four)
+
+## Phase 2: Parallel Research
+
+Spawn ALL 4 teammates in a single message:
+
+Spawn **tech-stack-analyst** as a background teammate (model: **sonnet**)
 
 ```
 {persona from references/personas/tech-stack-analyst.yaml}
 You are tech-stack-analyst of team "tech-research".
-Your task: Technology Stack Analysis
+Your task: tech-stack-analysis
 
 Read {steps_path}/step-02-technical-overview.md and conduct the Technology Stack Analysis research.
 Do the web searches specified in the step and produce the content sections as defined in "Content Structure".
@@ -65,7 +72,7 @@ Do not present [C] Continue to the user directly — the team lead will coordina
 
 {base context}
 
-When complete, report to team-lead with:
+When complete, mark tech-stack-analysis as completed and report to team-lead with:
 - Key findings summary (3-5 bullet points)
 - A request for user [C] Continue approval
 
@@ -73,12 +80,12 @@ Then go idle — you may receive follow-up requests for deeper investigation bef
 After team-lead relays user approval, append your full research content to the output_file and report completion.
 ```
 
-**integration-analyst** — Step 3, model: **sonnet**
+Spawn **integration-analyst** as a background teammate (model: **sonnet**)
 
 ```
 {persona from references/personas/integration-analyst.yaml}
 You are integration-analyst of team "tech-research".
-Your task: Integration Patterns Analysis
+Your task: integration-analysis
 
 Read {steps_path}/step-03-integration-patterns.md and conduct the Integration Patterns research.
 Do the web searches specified in the step and produce the content sections as defined in "Content Structure".
@@ -87,7 +94,7 @@ Do not present [C] Continue to the user directly — the team lead will coordina
 
 {base context}
 
-When complete, report to team-lead with:
+When complete, mark integration-analysis as completed and report to team-lead with:
 - Key findings summary (3-5 bullet points)
 - A request for user [C] Continue approval
 
@@ -95,12 +102,12 @@ Then go idle — you may receive follow-up requests for deeper investigation bef
 After team-lead relays user approval, append your full research content to the output_file and report completion.
 ```
 
-**architecture-analyst** — Step 4, model: **sonnet**
+Spawn **architecture-analyst** as a background teammate (model: **sonnet**)
 
 ```
 {persona from references/personas/architecture-analyst.yaml}
 You are architecture-analyst of team "tech-research".
-Your task: Architectural Patterns Analysis
+Your task: architecture-analysis
 
 Read {steps_path}/step-04-architectural-patterns.md and conduct the Architectural Patterns research.
 Do the web searches specified in the step and produce the content sections as defined in "Content Structure".
@@ -109,7 +116,7 @@ Do not present [C] Continue to the user directly — the team lead will coordina
 
 {base context}
 
-When complete, report to team-lead with:
+When complete, mark architecture-analysis as completed and report to team-lead with:
 - Key findings summary (3-5 bullet points)
 - A request for user [C] Continue approval
 
@@ -117,12 +124,12 @@ Then go idle — you may receive follow-up requests for deeper investigation bef
 After team-lead relays user approval, append your full research content to the output_file and report completion.
 ```
 
-**implementation-researcher** — Step 5, model: **sonnet**
+Spawn **implementation-researcher** as a background teammate (model: **sonnet**)
 
 ```
 {persona from references/personas/implementation-researcher.yaml}
 You are implementation-researcher of team "tech-research".
-Your task: Implementation Research
+Your task: implementation-research
 
 Read {steps_path}/step-05-implementation-research.md and conduct the Implementation Research.
 Do the web searches specified in the step and produce the content sections as defined in "Content Structure".
@@ -131,7 +138,7 @@ Do not present [C] Continue to the user directly — the team lead will coordina
 
 {base context}
 
-When complete, report to team-lead with:
+When complete, mark implementation-research as completed and report to team-lead with:
 - Key findings summary (3-5 bullet points)
 - A request for user [C] Continue approval
 
@@ -139,16 +146,17 @@ Then go idle — you may receive follow-up requests for deeper investigation bef
 After team-lead relays user approval, append your full research content to the output_file and report completion.
 ```
 
-### Content Assembly
+## Phase 3: Content Assembly
 
-After all 4 teammates report their key findings summaries:
+After all 4 teammates complete (aggregate task unblocks):
 
 1. Present the combined key findings to the user with [C] Continue
 2. If the user requests additional investigation before approving, route to the relevant teammate (e.g., architecture questions → **architecture-analyst**) — the teammate retains its original research context and can dig deeper immediately
 3. If the user approves, relay approval to each teammate in step order (2 → 3 → 4 → 5) so they write their content to the document
 4. After all writes complete, update frontmatter: `stepsCompleted: [1, 2, 3, 4, 5]`
-5. Shut down all teammates and clean up the team
 
-### Resuming Sequential Execution
+## Final Phase: Cleanup
+
+Shut down all teammates and clean up the team and its task list.
 
 After cleanup, load step-06-research-synthesis.md and execute it normally to produce the final comprehensive document.

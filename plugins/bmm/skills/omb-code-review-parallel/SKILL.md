@@ -39,13 +39,13 @@ Before starting review work, read these files for review context:
 - Architecture docs in {planning_artifacts}: for architectural violation detection
 ```
 
-### Phase 1: Team Setup
-
-Create a team named `code-review-{{story_key}}`.
-
-### Teammate Personas
+## Teammate Personas
 
 Persona files are in `references/personas/` (relative to the skill root). Before constructing each spawn prompt, read the corresponding persona YAML and include its `persona` block as the agent's identity at the top of the prompt.
+
+## Phase 1: Team Setup
+
+Create a team named `code-review-{{story_key}}`.
 
 Create tracked tasks for each review dimension. The first 4 are independent. The aggregate task depends on all 4 completing.
 
@@ -55,7 +55,7 @@ Create tracked tasks for each review dimension. The first 4 are independent. The
 - **code-quality**: "Deep code quality review on all implementation files"
 - **aggregate**: "Aggregate and categorize all review findings" (blocked by the above 4)
 
-### Phase 2: Parallel Review
+## Phase 2: Parallel Review
 
 All 4 review dimensions are independent — spawn ALL reviewer agents in a SINGLE message.
 
@@ -148,7 +148,7 @@ When complete, mark code-quality as completed and report to team-lead with:
 
 ---
 
-### Phase 3: Findings Aggregation
+## Phase 3: Findings Aggregation
 
 When all 4 reviewers complete (aggregate task unblocks):
 
@@ -160,7 +160,7 @@ When all 4 reviewers complete (aggregate task unblocks):
 
 Pass the aggregated, categorized findings to instructions.xml step 4.
 
-### Phase 4: Completion & Cleanup
+## Phase 4: Completion & Cleanup
 
 After instructions.xml step 5 completes:
 

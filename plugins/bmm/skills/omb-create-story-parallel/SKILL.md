@@ -16,7 +16,7 @@ description: 'Parallelized version of bmad-create-story that uses an Agent Team 
 
 ## Parallel Execution Override
 
-After completing instructions.xml step 1, prepare a base context block with all resolved workflow variables:
+After completing instructions.xml step 1, prepare a base context block:
 
 ```
 ## Workflow Context
@@ -32,58 +32,78 @@ After completing instructions.xml step 1, prepare a base context block with all 
 - sprint_status: {resolved}
 - communication_language: {resolved}
 - document_output_language: {resolved}
+
+## Step 1 Outputs
+- Target story identifier, title, and description from the epic list
+- Epic context and story position within the epic
+- Any constraints or prerequisites identified during story selection
 ```
 
-### Team Setup
-
-Create a team named `story-{{story_key}}`.
-
-### Teammate Personas
+## Teammate Personas
 
 Persona files are in `references/personas/` (relative to the skill root). Before constructing each spawn prompt, read the corresponding persona YAML and include its `persona` block as the agent's identity at the top of the prompt.
 
-### Parallel Research
+## Phase 1: Team Setup
 
-Spawn ALL 3 teammates in a SINGLE message (`run_in_background: true`):
+Create a team named `story-{{story_key}}`.
 
-**artifact-analyst** — Step 2, model: **opus**
+Create tracked tasks for each research dimension, plus an aggregate task that depends on all three completing:
+- **artifact-analysis**: "Planning artifact review"
+- **architecture-analysis**: "Codebase pattern analysis"
+- **tech-research**: "Technical approach research"
+- **aggregate**: "Synthesize research results for story drafting" (blocked by the above three)
+
+## Phase 2: Parallel Research
+
+Spawn ALL 3 teammates in a single message:
+
+Spawn **artifact-analyst** as a background teammate (model: **opus**)
 
 ```
 {persona from references/personas/artifact-analyst.yaml}
 You are artifact-analyst of team "story-{{story_key}}".
+Your task: artifact-analysis
 
-Read {installed_path}/instructions.xml and execute <step n="2"> exactly as written.
-Resolve all references using the workflow context below.
+Read {installed_path}/instructions.xml and execute the following ONLY:
+- <step n="2">
 
 {base context}
 
-When complete, send your analysis to team-lead.
+When complete, mark artifact-analysis as completed and report to team-lead with:
+- Key requirements and acceptance criteria extracted
+- Dependencies and constraints discovered
+- Cross-references to other stories or epics
 Then go idle — you may receive follow-up requests for deeper investigation.
 ```
 
-**architecture-analyst** — Step 3, model: **sonnet**
+Spawn **architecture-analyst** as a background teammate (model: **sonnet**)
 
 ```
 {persona from references/personas/architecture-analyst.yaml}
 You are architecture-analyst of team "story-{{story_key}}".
+Your task: architecture-analysis
 
-Read {installed_path}/instructions.xml and execute <step n="3"> exactly as written.
-Resolve all references using the workflow context below.
+Read {installed_path}/instructions.xml and execute the following ONLY:
+- <step n="3">
 
 {base context}
 
-When complete, send your analysis to team-lead.
+When complete, mark architecture-analysis as completed and report to team-lead with:
+- Relevant codebase patterns and conventions identified
+- Technical constraints and integration points
+- Recommended approach based on existing architecture
 Then go idle — you may receive follow-up requests for deeper investigation.
 ```
 
-**tech-researcher** — Step 4, model: **sonnet**
+Spawn **tech-researcher** as a background teammate (model: **sonnet**)
 
 ```
 {persona from references/personas/tech-researcher.yaml}
 You are tech-researcher of team "story-{{story_key}}".
+Your task: tech-research
 
-Read {installed_path}/instructions.xml and execute <step n="4"> exactly as written.
-Resolve all references using the workflow context below.
+Read {installed_path}/instructions.xml and execute the following ONLY:
+- <step n="4">
 
 Since step 3 (architecture analysis) runs concurrently, you cannot receive its output directly.
 To identify technologies for research, load the architecture document from {planning_artifacts} yourself
@@ -91,21 +111,24 @@ and extract relevant libraries, frameworks, and APIs before proceeding with step
 
 {base context}
 
-When complete, send your analysis to team-lead.
+When complete, mark tech-research as completed and report to team-lead with:
+- Technologies and libraries evaluated with trade-offs
+- Recommended technical approaches
+- Implementation risks and mitigations identified
 Then go idle — you may receive follow-up requests for deeper investigation.
 ```
 
-### Resuming Sequential Execution
+## Phase 3: Sequential Resumption
 
-After all 3 teammates send their analyses, use those results as input context for instructions.xml step 5 onward.
+After all 3 teammates complete (aggregate task unblocks), use their analyses as input context for instructions.xml step 5 onward.
 
 If the user requests additional investigation on a specific area during step 5+:
 - Route the request to the relevant teammate (e.g., architecture questions → **architecture-analyst**)
 - The teammate retains its original research context and can dig deeper immediately
 
-### Cleanup
+## Final Phase: Cleanup
 
-After step 6 completes, request all teammates to shut down gracefully and clean up the team and its task list.
+After step 6 completes, shut down all teammates and clean up the team and its task list.
 
 ## Next Step Handoff
 
