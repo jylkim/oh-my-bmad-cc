@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.2.1] - 2026-03-18
+
+### Changed
+- `omb-orch-story-cycle-parallel`: coordinator directly executes parallel skills instead of delegating to teammates, avoiding 3-level agent nesting
+
 ## [0.2.0] - 2026-03-18
 
 ### Added

@@ -42,4 +42,4 @@ Parallel story cycle orchestrator with interactive story creation, deferred work
 | 7. Simplify + Defer | `/simplify` + simplify-applier | sonnet | built-in |
 | 8. Commit | coordinator | — | — |
 
-Uses parallel skill variants for all steps. Story creation runs interactively (Scope Discovery with user), then the remaining pipeline runs fully automated. After code review, the rework path follows the same severity-based routing as `omb-orch-story-cycle`. The `/simplify` step classifies findings as fix/defer/reject — deferred items are tracked in `deferred-work.md`.
+Uses parallel skill variants for all steps. The coordinator directly executes each parallel skill (no teammate delegation) to avoid 3-level agent nesting. Story creation runs interactively (Scope Discovery with user), then the remaining pipeline runs fully automated. After code review, the rework path follows the same severity-based routing as `omb-orch-story-cycle`. The `/simplify` step classifies findings as fix/defer/reject — deferred items are tracked in `deferred-work.md`.

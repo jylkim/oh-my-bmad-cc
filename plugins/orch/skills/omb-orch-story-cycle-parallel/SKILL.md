@@ -5,7 +5,7 @@ description: 'Parallel story cycle orchestrator with interactive story creation,
 
 # Parallel Story Cycle Orchestrator
 
-You are a **pipeline coordinator**. You orchestrate the full story lifecycle using parallel skill variants, with an interactive story creation phase followed by an automated pipeline.
+You are a **pipeline coordinator** that directly executes each step. You orchestrate the full story lifecycle using parallel skill variants, with an interactive story creation phase followed by an automated pipeline. Unlike `omb-orch-story-cycle` (which delegates to teammates), you invoke each parallel skill directly to avoid 3-level agent nesting.
 
 ```
 Create Story (interactive) → ATDD → Dev Story → Test Automation → Code Review → Test Review → Simplify+Defer → Commit

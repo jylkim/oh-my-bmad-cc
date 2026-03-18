@@ -5,54 +5,35 @@ This document defines the automated execution pipeline invoked after the user se
 ## Execution Rules
 
 <rules CRITICAL="TRUE">
-1. **One teammate at a time.** Spawn the next teammate ONLY after the previous one completes successfully.
-2. Each teammate runs in **yolo** mode — no user interaction during automated steps.
-3. **Teammates MUST NOT commit.** No `git commit`, `git add`, or staging operations. Only the coordinator commits in Step 7.
+1. **Coordinator executes all steps directly.** No teammates for Steps 1–5. The coordinator invokes each slash command itself.
+2. All steps run in **yolo** mode — no user interaction during automated steps.
+3. **No commits until Step 7.** No `git commit`, `git add`, or staging operations during Steps 1–5.
 4. **On failure:** Report which step failed and why, then STOP immediately. Do not continue.
-5. The coordinator does NOT execute slash commands directly (except Steps 6 and 7). All other steps are delegated to teammates.
+5. **One step at a time.** Complete each step fully before starting the next.
 </rules>
-
-## Teammate Personas
-
-Persona files are in `references/personas/` (relative to the skill root). Before constructing each spawn prompt, read the corresponding persona YAML and include its `persona` block as the agent's identity at the top of the prompt.
 
 ## Step 1: ATDD Test Architecture
 
 **Skip if `pipeline_mode` is `tea-excluded`.**
 
-Spawn a teammate (model: **opus**):
-```
-Teammate runs: /omb-tea-testarch-atdd-parallel {STORY_ID} yolo
-```
+Coordinator directly runs: `/omb-tea-testarch-atdd-parallel {STORY_ID} yolo`
 
 ## Step 2: Dev Story Implementation
 
-Spawn a teammate (model: **sonnet**):
-```
-Teammate runs: /omb-dev-story-parallel {STORY_ID} yolo
-```
+Coordinator directly runs: `/omb-dev-story-parallel {STORY_ID} yolo`
 
 ## Step 3: Test Automation
 
 **Skip if `pipeline_mode` is `tea-excluded`.**
 
-Spawn a teammate (model: **sonnet**):
-```
-Teammate runs: /omb-tea-testarch-automate-parallel {STORY_ID} yolo
-```
+Coordinator directly runs: `/omb-tea-testarch-automate-parallel {STORY_ID} yolo`
 
 ## Step 4: Code Review
 
-Spawn a teammate (model: **opus**):
-
 - **Iterations 1–2:**
-  ```
-  Teammate runs: /omb-code-review-parallel {STORY_ID} yolo, create action items for all the issues and classify each issue scope as MINOR, MODERATE, or SEVERE
-  ```
+  Coordinator directly runs: `/omb-code-review-parallel {STORY_ID} yolo, create action items for all the issues and classify each issue scope as MINOR, MODERATE, or SEVERE`
 - **Iteration 3 (final):**
-  ```
-  Teammate runs: /omb-code-review-parallel {STORY_ID} yolo, auto accept and fix all the issues
-  ```
+  Coordinator directly runs: `/omb-code-review-parallel {STORY_ID} yolo, auto accept and fix all the issues`
 
 ## Rework Decision (after Step 4)
 
@@ -80,14 +61,11 @@ Maximum **3 total iterations** (initial run + up to 2 rework cycles).
 
 **Skip if `pipeline_mode` is `tea-excluded`.**
 
-Spawn a teammate (model: **opus**):
-```
-Teammate runs: /omb-tea-testarch-test-review-parallel {STORY_ID} yolo
-```
+Coordinator directly runs: `/omb-tea-testarch-test-review-parallel {STORY_ID} yolo`
 
 ## Step 6: Simplify + Defer
 
-The **coordinator directly** invokes `/simplify` (Phase 1–2 only: identify changes and launch three review agents).
+The coordinator directly invokes `/simplify` (Phase 1–2 only: identify changes and launch three review agents).
 
 After the review agents complete, classify each finding as **fix**, **defer**, or **reject**:
 
@@ -107,7 +85,7 @@ After the review agents complete, classify each finding as **fix**, **defer**, o
 
 ## Step 7: Commit
 
-The **coordinator directly** performs the final commit:
+The coordinator directly performs the final commit:
 
 1. Run `git status` and `git diff --stat` to review all changes from this pipeline run.
 2. Present the summary to the user and ask for confirmation.
