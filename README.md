@@ -73,6 +73,11 @@ Pipeline orchestration skills for BMAD workflows. Automates multi-step story exe
 - [ ] **qa-generate-e2e-tests parallel** — Generate E2E tests per feature/epic area in parallel. Already an `autonomous: true` workflow.
 - [ ] **document-project parallel** — After project type detection, parallelize per-section documentation (API, data models, UI, tests, source tree).
 
+### orch — Pipeline orchestration
+
+- [x] **story-cycle** — Automated 8-step story execution pipeline with severity-based rework flow. Uses original (non-parallel) skill variants.
+- [x] **story-cycle-parallel** — Same pipeline using parallel skill variants. Interactive story creation (Scope Discovery), automated pipeline with deferred work tracking.
+
 ### tea — Parallel skills for BMAD TEA workflows
 
 - [x] **test-review parallel** — Run 4 independent quality evaluation dimensions (determinism, isolation, maintainability, performance) concurrently, then aggregate into report.

@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.7.0] - 2026-03-18
+
+### Removed
+- Next Step Handoff from all parallel skills (`omb-create-story-parallel`, `omb-dev-story-parallel`, `omb-code-review-parallel`)
+
 ## [0.6.0] - 2026-03-16
 
 ### Added

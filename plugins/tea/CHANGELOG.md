@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.3.0] - 2026-03-18
+
+### Removed
+- Next Step Handoff from all parallel skills (`omb-tea-testarch-atdd-parallel`, `omb-tea-testarch-automate-parallel`, `omb-tea-testarch-test-review-parallel`)
+
 ## [0.2.0] - 2026-03-16
 
 ### Added

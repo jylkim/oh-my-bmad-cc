@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.2.0] - 2026-03-18
+
+### Added
+- Parallel story cycle orchestrator (`omb-orch-story-cycle-parallel`) — uses parallel skill variants, interactive story creation with Scope Discovery, and deferred work tracking
+
 ## [0.1.2] - 2026-03-13
 
 ### Fixed

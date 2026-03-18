@@ -128,30 +128,6 @@ read the corresponding persona YAML and include its `persona` block as the agent
 - Pass preceding step outputs via base context
 - List specific items to report on completion
 
-### 5. Next Step Handoff — Chain Skills in a Pipeline
-
-When a skill is part of a multi-step pipeline, add a **Next Step Handoff** section after the Final Phase (Cleanup). This uses **AskUserQuestion** to propose the next skill in the pipeline and, on approval, automatically invokes it.
-
-```markdown
-## Next Step Handoff
-
-After cleanup, use **AskUserQuestion** to present next steps:
-
-**Question:** "{skill} complete. Proceed to {next skill}?"
-
-**Options:**
-1. **Proceed to {next skill}** — Run `/{next-skill-name}`
-2. **Continue reviewing** — Stay in current context for further review
-3. **Done for now** — End pipeline
-
-If user selects the first option, invoke the slash command.
-```
-
-**Key rules:**
-- Place the handoff **after** cleanup — all teammates must be shut down before chaining
-- When the next step depends on plugin availability (e.g., TEA), check whether the target skill exists and adjust the options accordingly
-- When the outcome determines the next step (e.g., code review pass vs. rework), read the result first, then present the appropriate options with context on why
-
 ## Anti-Patterns
 
 ### Do Not Use Tool-Specific Terminology

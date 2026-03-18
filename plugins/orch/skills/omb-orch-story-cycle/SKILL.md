@@ -124,11 +124,12 @@ Maximum **3 total iterations** (initial run + up to 2 rework cycles).
 <rules CRITICAL="TRUE">
 1. **One teammate per step.** Spawn the next teammate ONLY after the previous one completes successfully.
 2. Each teammate invokes its slash command **exactly as written above**, including all arguments after the command name.
-3. **NO parallel execution.** Steps have strict sequential dependencies.
-4. You are the **coordinator only** — delegate, do not execute slash commands yourself.
-5. After each step completes, **confirm success** before spawning the next teammate.
-6. **On failure:** Report which step failed and why, then STOP immediately. Do not continue.
-7. After all steps complete (including rework iterations if any), provide a **summary** of the full pipeline run including:
+3. **Teammates MUST NOT commit.** No `git commit`, `git add`, or staging operations. Only the coordinator commits in Step 8.
+4. **NO parallel execution.** Steps have strict sequential dependencies.
+5. You are the **coordinator only** — delegate, do not execute slash commands yourself.
+6. After each step completes, **confirm success** before spawning the next teammate.
+7. **On failure:** Report which step failed and why, then STOP immediately. Do not continue.
+8. After all steps complete (including rework iterations if any), provide a **summary** of the full pipeline run including:
    - Total iterations executed
    - Rework paths taken (if any) with severity classifications
    - Steps skipped or re-run

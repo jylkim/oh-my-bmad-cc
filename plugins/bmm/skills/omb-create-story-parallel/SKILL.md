@@ -144,26 +144,3 @@ If the user requests additional investigation on a specific area during step 5+:
 
 After step 6 completes, shut down all teammates and clean up the team and its task list.
 
-## Next Step Handoff
-
-After cleanup, use **AskUserQuestion** to present next steps.
-
-**If TEA is available** (`/omb-tea-testarch-atdd-parallel` skill exists):
-
-**Question:** "Story creation complete. Proceed to ATDD test design?"
-
-**Options:**
-1. **Proceed to ATDD** — Run `/omb-tea-testarch-atdd-parallel`
-2. **Continue reviewing** — Stay in current context for further review
-3. **Done for now** — End pipeline
-
-**If TEA is unavailable:**
-
-**Question:** "Story creation complete. Proceed to Dev Story implementation?"
-
-**Options:**
-1. **Proceed to Dev Story** — Run `/omb-dev-story-parallel`
-2. **Continue reviewing** — Stay in current context for further review
-3. **Done for now** — End pipeline
-
-If user selects the first option, invoke the corresponding slash command.
