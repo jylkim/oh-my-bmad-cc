@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.7.1] - 2026-03-19
+
+### Changed
+- `omb-create-story-parallel`: Scope Discovery questions now require context explanation and recommendation before asking, improving user decision-making experience
+- `omb-create-story-parallel`: Scope Discovery uses interactive ask-and-wait pattern instead of batched questions
+
 ## [0.7.0] - 2026-03-18
 
 ### Removed

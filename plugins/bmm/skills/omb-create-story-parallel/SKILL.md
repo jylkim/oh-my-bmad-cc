@@ -30,13 +30,14 @@ After completing instructions.xml step 2, review the extracted requirements, con
 - Acceptance criteria are vague or overly broad
 - Trade-offs exist that affect the research direction
 
-When scope needs narrowing, engage the user with targeted questions:
+When scope needs narrowing, **ask the user interactively** — present one question at a time, wait for their explicit response, then proceed to the next question or move on. Do not batch questions or continue without the user's answer:
 
 - Ask **one question at a time** — do not overwhelm with multiple questions
 - **Prefer multiple choice** when natural options exist (e.g., "Should this story cover: (a) only the API layer, (b) API + basic UI, or (c) full stack including tests?")
 - **Start broad, then narrow** — confirm the core intent first, then refine constraints
 - **Validate assumptions explicitly** — "The PRD mentions X, but the epic description says Y. Which takes priority?"
 - **Ground questions in artifact analysis results** — reference specific requirements, dependencies, or ambiguities discovered in step 2
+- **Always lead with context, then recommend** — before asking a question, briefly explain what you found during artifact analysis and why this decision matters for the upcoming research. Then state your recommendation with reasoning before presenting options. Example: "The PRD lists both REST and GraphQL as possible API styles. Since the existing codebase uses REST exclusively, I'd recommend (a) REST to stay consistent — but (b) GraphQL could be worth it if the frontend needs flexible queries. Which do you prefer?"
 
 **Exit condition:** Proceed when development goals are clear enough to guide research, OR the user says "proceed" / "let's move on".
 
