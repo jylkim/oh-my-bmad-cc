@@ -6,15 +6,15 @@ description: 'Parallel pipeline execution of bmad-dev-story. Use when the user s
 <steps CRITICAL="TRUE">
 
 1. Read `{project-root}/.claude/skills/bmad-dev-story/SKILL.md` and follow its instructions EXACTLY
-2. When workflow.xml reaches instructions.xml execution, execute steps 1-4 (setup) as normal
+2. When workflow.md reaches execution, execute steps 1-4 (setup) as normal
 3. After step 4, apply the **parallel execution override** below instead of the normal step 5-8 loop
-4. After all parallel work completes, resume sequential execution from instructions.xml step 9 onward
+4. After all parallel work completes, resume sequential execution from workflow.md step 9 onward
 
 </steps>
 
 ## Parallel Execution Override
 
-After completing instructions.xml step 4, prepare a base context block with all resolved workflow variables:
+After completing workflow.md step 4, prepare a base context block with all resolved workflow variables:
 
 ```
 ## Workflow Context
@@ -34,7 +34,7 @@ Before starting work, read these files for implementation context:
 
 ### Pipeline Selection
 
-Check `review_continuation` from instructions.xml step 3:
+Check `review_continuation` from workflow.md step 3:
 
 - **`review_continuation == false`** (fresh implementation):
   Read and follow `references/implementation-pipeline.md`.
@@ -44,5 +44,5 @@ Check `review_continuation` from instructions.xml step 3:
   Read and follow `references/review-pipeline.md`.
   This is a lightweight 2-stage pipeline: Fix (refactorer) → Verify, for addressing `[AI-Review]` action items.
 
-Both pipelines end with integration validation, then return here to resume instructions.xml step 9.
+Both pipelines end with integration validation, then return here to resume workflow.md step 9.
 

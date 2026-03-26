@@ -54,7 +54,7 @@ Spawn **refactorer-{R}** as a background teammate (model: **sonnet**)
 You are refactorer-{R} of team "dev-{{story_key}}-review".
 Your task: fix-{R}
 
-Read {installed_path}/instructions.xml for project conventions reference.
+Read {installed_path}/workflow.md for project conventions reference.
 
 Review finding to address:
 - Severity: {severity}
@@ -86,7 +86,7 @@ When refactorer-{R} sends its completion message, **immediately** spawn **valida
 You are validator-{R} of team "dev-{{story_key}}-review".
 Your task: verify-{R}
 
-Read {installed_path}/instructions.xml for validation reference.
+Read {installed_path}/workflow.md for validation reference.
 
 Validate that the review finding has been properly addressed:
 - Run full test suite — no regressions
@@ -180,4 +180,4 @@ After integration validation passes:
 Request all teammates to shut down gracefully.
 Clean up the team and its task list.
 
-Resume instructions.xml step 9 (story completion).
+Resume workflow.md step 9 (story completion).

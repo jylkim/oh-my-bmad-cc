@@ -59,14 +59,12 @@ Pipeline orchestration skills for BMAD workflows. Automates multi-step story exe
 
 ### bmm — Parallel/sub-agent skills for BMAD BMM workflows
 
-- [x] **create-story parallel** — Parallelize artifact analysis, architecture analysis, and tech research with 3 concurrent agents.
+- [x] **create-story parallel** — Parallelize architecture analysis and tech research with 2 concurrent agents after interactive scope discovery.
 - [x] **dev-story parallel** — TDD pipeline with per-task parallelism based on dependency graph.
 - [x] **code-review parallel** — Run 4 independent review dimensions (git audit, AC validation, task audit, code quality) concurrently.
 - [x] **technical-research parallel** — Run 4 research dimensions (tech stack, integration, architecture, implementation) concurrently.
 - [x] **market-research parallel** — Run 4 research dimensions (behavior, pain points, decisions, competitive) concurrently.
 - [x] **domain-research parallel** — Run 4 research dimensions (industry, competitive, regulatory, technical trends) concurrently.
-- [x] **quick-dev isolated review** — Run adversarial review in a fresh-context sub-agent to eliminate confirmation bias.
-- [x] **quick-spec isolated review** — Run adversarial review step in a fresh-context sub-agent to eliminate confirmation bias. Same pattern as quick-dev-isolated-review.
 - [ ] **validate-prd parallel** — Run 10 independent validation dimensions (density, brief coverage, measurability, traceability, etc.) concurrently against the same PRD document. Same pattern as code-review-parallel.
 - [ ] **check-implementation-readiness parallel** — Parallelize 3 independent validation analyses (FR coverage, UX alignment, epic quality) after requirement extraction, then aggregate into readiness report.
 - [ ] **create-epics-and-stories parallel** — After epic list approval, generate stories per epic concurrently with dedicated sub-agents.

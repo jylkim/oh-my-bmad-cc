@@ -1,6 +1,6 @@
 # Implementation Pipeline (Phase 1-5)
 
-Full 4-stage TDD pipeline for fresh story implementation. Overrides instructions.xml steps 5-8.
+Full 4-stage TDD pipeline for fresh story implementation. Overrides workflow.md steps 5-8.
 
 ## Teammate Personas
 
@@ -69,7 +69,7 @@ Spawn **tester-{N}** as a background teammate (model: **sonnet**)
 You are tester-{N} of team "dev-{{story_key}}".
 Your task: red-{N}
 
-Read {installed_path}/instructions.xml and execute the following for Task {N} ONLY:
+Read {installed_path}/workflow.md and execute the following for Task {N} ONLY:
 - Step 5 RED PHASE: Write FAILING tests first for task/subtask functionality
 - Step 6: Author comprehensive tests (unit, integration, edge cases per story Dev Notes)
 
@@ -104,7 +104,7 @@ When tester-{N} sends its completion message, **immediately** spawn **implemente
 You are implementer-{N} of team "dev-{{story_key}}".
 Your task: green-{N}
 
-Read {installed_path}/instructions.xml and execute the following for Task {N} ONLY:
+Read {installed_path}/workflow.md and execute the following for Task {N} ONLY:
 - Step 5 GREEN PHASE: Implement MINIMAL code to make ALL pre-written tests pass
 
 Focus on correctness only — write the simplest code that satisfies every test assertion.
@@ -145,7 +145,7 @@ When implementer-{N} sends its completion message, **immediately** spawn **refac
 You are refactorer-{N} of team "dev-{{story_key}}".
 Your task: refactor-{N}
 
-Read {installed_path}/instructions.xml and execute the following for Task {N} ONLY:
+Read {installed_path}/workflow.md and execute the following for Task {N} ONLY:
 - Step 5 REFACTOR PHASE: Improve code structure while keeping ALL tests green
 
 All tests are currently passing. Your job is to improve code quality WITHOUT breaking them.
@@ -189,7 +189,7 @@ When refactorer-{N} sends its completion message, **immediately** spawn **valida
 You are validator-{N} of team "dev-{{story_key}}".
 Your task: verify-{N}
 
-Read {installed_path}/instructions.xml and execute the following for Task {N}:
+Read {installed_path}/workflow.md and execute the following for Task {N}:
 - Step 7: Run validations and tests (full test suite, linting, code quality, acceptance criteria)
 - Step 8 VALIDATION GATES: Verify all tests exist and pass, implementation matches spec, no regressions
 
@@ -284,4 +284,4 @@ After integration validation passes:
 Request all teammates to shut down gracefully.
 Clean up the team and its task list.
 
-Resume instructions.xml step 9 (story completion).
+Resume workflow.md step 9 (story completion).

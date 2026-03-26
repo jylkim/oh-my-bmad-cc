@@ -27,7 +27,7 @@ After completing step 1, prepare a base context block with all resolved workflow
 - communication_language: {resolved}
 - document_output_language: {resolved}
 - output_file: {resolved path to the research document created in ROUTE TO TECHNICAL RESEARCH STEPS}
-- steps_path: {project-root}/_bmad/bmm/workflows/1-analysis/research/technical-steps
+- steps_path: {project-root}/_bmad/bmm/1-analysis/research/bmad-technical-research/technical-steps
 
 ## Step 1 Outputs
 - Confirmed research scope and approach

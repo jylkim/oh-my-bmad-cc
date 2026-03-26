@@ -6,11 +6,11 @@ description: 'Parallelized version of bmad-create-story that uses an Agent Team 
 <steps CRITICAL="TRUE">
 
 1. Read `{project-root}/.claude/skills/bmad-create-story/SKILL.md` and follow its instructions EXACTLY
-2. When workflow.xml reaches instructions.xml execution, execute step 1 (determine target story) as normal
-3. Execute instructions.xml step 2 (artifact analysis) as normal — team lead does this directly
+2. When workflow.md reaches execution, execute step 1 (determine target story) as normal
+3. Execute workflow.md step 2 (artifact analysis) as normal — team lead does this directly
 4. After step 2, run **Scope Discovery** below to narrow development goals with the user
 5. After scope discovery, apply the **parallel execution override** below instead of sequential steps 3, 4
-6. After all parallel agents complete, resume sequential execution from instructions.xml step 5 onward
+6. After all parallel agents complete, resume sequential execution from workflow.md step 5 onward
 7. When the user requests additional investigation on a specific area, route it to the relevant teammate instead of doing it yourself
 8. After step 6 completes, shut down teammates and clean up the team
 
@@ -18,7 +18,7 @@ description: 'Parallelized version of bmad-create-story that uses an Agent Team 
 
 ## Scope Discovery
 
-After completing instructions.xml step 2, review the extracted requirements, constraints, and dependencies. Assess whether the story scope is clear enough to proceed directly to research.
+After completing workflow.md step 2, review the extracted requirements, constraints, and dependencies. Assess whether the story scope is clear enough to proceed directly to research.
 
 **Signals that scope is clear — skip to parallel research:**
 - Story has specific, unambiguous acceptance criteria
@@ -98,7 +98,7 @@ Spawn **architecture-analyst** as a background teammate (model: **sonnet**)
 You are architecture-analyst of team "story-{{story_key}}".
 Your task: architecture-analysis
 
-Read {installed_path}/instructions.xml and execute the following ONLY:
+Read {installed_path}/workflow.md and execute the following ONLY:
 - <step n="3">
 
 {base context}
@@ -117,7 +117,7 @@ Spawn **tech-researcher** as a background teammate (model: **sonnet**)
 You are tech-researcher of team "story-{{story_key}}".
 Your task: tech-research
 
-Read {installed_path}/instructions.xml and execute the following ONLY:
+Read {installed_path}/workflow.md and execute the following ONLY:
 - <step n="4">
 
 Since step 3 (architecture analysis) runs concurrently, you cannot receive its output directly.
@@ -135,7 +135,7 @@ Then go idle — you may receive follow-up requests for deeper investigation.
 
 ## Phase 3: Story Drafting
 
-After both teammates complete (aggregate task unblocks), use their analyses as input context for instructions.xml step 5 onward.
+After both teammates complete (aggregate task unblocks), use their analyses as input context for workflow.md step 5 onward.
 
 If the user requests additional investigation on a specific area during step 5+:
 - Route the request to the relevant teammate (e.g., architecture questions → **architecture-analyst**)

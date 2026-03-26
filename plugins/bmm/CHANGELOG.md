@@ -1,5 +1,19 @@
 # Changelog
 
+## [0.8.0] - 2026-03-26
+
+### Removed
+- `omb-quick-spec-isolated-review` skill — upstream `bmad-quick-spec` no longer exists in BMAD v6.2.2
+- `omb-quick-dev-isolated-review` skill — upstream `bmad-quick-dev` changed significantly; will be re-implemented later
+
+### Fixed
+- `omb-code-review-parallel`: migrate `instructions.xml` references to v6.2.2 step-file architecture (`steps/step-01` through `step-04`)
+- `omb-create-story-parallel`: migrate `instructions.xml` and `workflow.xml` references to `workflow.md`
+- `omb-dev-story-parallel`: migrate `instructions.xml` and `workflow.xml` references to `workflow.md` (SKILL.md, implementation-pipeline.md, review-pipeline.md)
+- `omb-domain-research-parallel`: fix research steps path to `_bmad/bmm/1-analysis/research/bmad-domain-research/domain-steps`
+- `omb-market-research-parallel`: fix research steps path to `_bmad/bmm/1-analysis/research/bmad-market-research/steps`
+- `omb-technical-research-parallel`: fix research steps path to `_bmad/bmm/1-analysis/research/bmad-technical-research/technical-steps`
+
 ## [0.7.1] - 2026-03-19
 
 ### Changed

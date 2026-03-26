@@ -1,18 +1,17 @@
 # bmm
 
-Pipeline skills for BMAD BMM workflows. Parallelizes story creation, development, code review, and research with Agent Teams, and provides context-isolated review for unbiased adversarial analysis.
+Pipeline skills for BMAD BMM workflows. Parallelizes story creation, development, code review, and research with Agent Teams.
 
 ## Skills
 
 ### [omb-create-story-parallel](skills/omb-create-story-parallel/SKILL.md)
 
-Parallelized execution of `bmad-create-story`. Overrides research steps (2–4) with 3 concurrent analysis agents.
+Parallelized execution of `bmad-create-story`. Overrides research steps (3–4) with 2 concurrent analysis agents after interactive scope discovery.
 
-Three research agents run simultaneously:
+Two research agents run simultaneously:
 
 | Analysis | Agent | Model | Focus |
 |----------|-------|-------|-------|
-| Artifact Analysis | artifact-analyst | Opus | PRD, epics, and existing artifacts |
 | Architecture Analysis | architecture-analyst | Sonnet | Technical architecture review |
 | Tech Research | tech-researcher | Sonnet | Technology investigation |
 
@@ -102,26 +101,3 @@ Four research agents run simultaneously:
 
 Agents report key findings summaries; team lead coordinates user [C] Continue approval. Upon approval, agents write directly to the document before shutdown.
 
-### [omb-quick-spec-isolated-review](skills/omb-quick-spec-isolated-review/SKILL.md)
-
-Context-isolated adversarial review for `bmad-quick-spec`. Overrides the [R] Adversarial Review option in step-04's Final Menu by spawning a separate agent with no spec-authoring context.
-
-The main agent runs steps 1–3 and step-04 Sections 1–3 normally, then when the user selects [R], hands the finalized spec to an isolated reviewer:
-
-| Role | Agent | Model | Focus |
-|------|-------|-------|-------|
-| Adversarial Reviewer | (foreground sub-agent) | Opus | Spec-only review with zero authoring context |
-
-The reviewer receives only the spec content and `bmad-review-adversarial-general/workflow.md` — no conversation history, codebase investigation results, or decisions made during authoring. This eliminates confirmation bias from the spec author reviewing their own work. Findings are processed back by the main agent before returning to the Final Menu.
-
-### [omb-quick-dev-isolated-review](skills/omb-quick-dev-isolated-review/SKILL.md)
-
-Context-isolated adversarial review for `bmad-quick-dev`. Overrides step 5 by spawning a separate agent with no implementation context.
-
-The main agent runs steps 1–4 normally, then constructs a diff and hands it to an isolated reviewer:
-
-| Role | Agent | Model | Focus |
-|------|-------|-------|-------|
-| Adversarial Reviewer | (foreground sub-agent) | Opus | Diff-only review with zero implementation context |
-
-The reviewer receives only the diff and `bmad-review-adversarial-general/workflow.md` — no plans, decisions, or self-check results. This eliminates confirmation bias from the implementing agent reviewing its own work. Findings are processed back by the main agent before resuming step 6.

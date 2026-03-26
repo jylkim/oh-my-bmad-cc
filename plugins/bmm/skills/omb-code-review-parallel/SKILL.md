@@ -6,15 +6,15 @@ description: 'Parallel pipeline execution of bmad-code-review. Use when the user
 <steps CRITICAL="TRUE">
 
 1. Read `{project-root}/.claude/skills/bmad-code-review/SKILL.md` and follow its instructions EXACTLY
-2. When workflow.xml reaches instructions.xml execution, execute steps 1-2 (setup) as normal
-3. After step 2, apply the **parallel review override** below instead of normal step 3
-4. After parallel review completes with aggregated findings, resume sequential execution from instructions.xml step 4 onward
+2. When workflow.md reaches step-file execution, execute step-01-gather-context.md (setup) as normal
+3. After step-01 completes, apply the **parallel review override** below instead of normal step-02-review.md
+4. After parallel review completes with aggregated findings, resume sequential execution from step-03-triage.md onward
 
 </steps>
 
 ## Parallel Review Override
 
-After completing instructions.xml step 2, prepare a base context block with all resolved workflow variables:
+After completing step-01-gather-context.md, prepare a base context block with all resolved workflow variables:
 
 ```
 ## Workflow Context
@@ -70,7 +70,7 @@ Spawn **git-auditor** as a background teammate (model: **sonnet**)
 You are git-auditor of team "code-review-{{story_key}}".
 Your task: git-audit
 
-Read {installed_path}/instructions.xml and execute the following from step 3 ONLY:
+Execute the following review actions:
 - "Git vs Story Discrepancies" review actions
 
 {base context — includes review_attack_plan, comprehensive_file_list, git_discrepancies}
@@ -91,7 +91,7 @@ Spawn **ac-validator** as a background teammate (model: **opus**)
 You are ac-validator of team "code-review-{{story_key}}".
 Your task: ac-validate
 
-Read {installed_path}/instructions.xml and execute the following from step 3 ONLY:
+Execute the following review actions:
 - "AC Validation" review actions
 
 {base context — includes review_attack_plan, comprehensive_file_list}
@@ -113,7 +113,7 @@ Spawn **task-auditor** as a background teammate (model: **opus**)
 You are task-auditor of team "code-review-{{story_key}}".
 Your task: task-audit
 
-Read {installed_path}/instructions.xml and execute the following from step 3 ONLY:
+Execute the following review actions:
 - "Task Completion Audit" review actions
 
 {base context — includes review_attack_plan, comprehensive_file_list}
@@ -135,9 +135,9 @@ Spawn **code-reviewer** as a background teammate (model: **opus**)
 You are code-reviewer of team "code-review-{{story_key}}".
 Your task: code-quality
 
-Read {installed_path}/instructions.xml and execute the following from step 3 ONLY:
+Execute the following review actions:
 - "Code Quality Deep Dive" review actions
-- Also read the minimum issue check at the end of step 3
+- Also apply the minimum issue check at the end of the review
 
 {base context — includes review_attack_plan, comprehensive_file_list}
 
@@ -158,11 +158,11 @@ When all 4 reviewers complete (aggregate task unblocks):
 4. If total findings < 3, send **code-reviewer** a message requesting deeper analysis. Wait for additional findings.
 5. Mark aggregate as completed
 
-Pass the aggregated, categorized findings to instructions.xml step 4.
+Pass the aggregated, categorized findings to step-03-triage.md.
 
 ## Phase 4: Completion & Cleanup
 
-After instructions.xml step 5 completes:
+After step-04-present.md completes:
 
 Request all teammates to shut down gracefully.
 Clean up the team and its task list.
