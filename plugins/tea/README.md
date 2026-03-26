@@ -6,7 +6,7 @@ Pipeline skills for BMAD TEA (Test Engineering & Architecture) workflows. Parall
 
 ### [omb-tea-testarch-atdd-parallel](skills/omb-tea-testarch-atdd-parallel/SKILL.md)
 
-Parallelized execution of `bmad-tea-testarch-atdd`. Overrides step 4 (orchestration) with 2 concurrent test generation agents.
+Parallelized execution of `bmad-testarch-atdd`. Overrides step 4 (orchestration) with 2 concurrent test generation agents.
 
 Two test generation agents run simultaneously:
 
@@ -19,7 +19,7 @@ Steps 1–3 (preflight, mode selection, test strategy) run sequentially as norma
 
 ### [omb-tea-testarch-automate-parallel](skills/omb-tea-testarch-automate-parallel/SKILL.md)
 
-Parallelized execution of `bmad-tea-testarch-automate`. Overrides step 3 (orchestration) with up to 3 concurrent test generation agents based on `detected_stack`.
+Parallelized execution of `bmad-testarch-automate`. Overrides step 3 (orchestration) with up to 3 concurrent test generation agents based on `detected_stack`.
 
 | Role | Agent | Model | Condition | Focus |
 |------|-------|-------|-----------|-------|
@@ -31,7 +31,7 @@ Steps 1–2 (preflight, identify targets) run sequentially as normal. Step 3's o
 
 ### [omb-tea-testarch-test-review-parallel](skills/omb-tea-testarch-test-review-parallel/SKILL.md)
 
-Parallelized execution of `bmad-tea-testarch-test-review`. Overrides step 3 (orchestration) with 4 concurrent quality dimension reviewers.
+Parallelized execution of `bmad-testarch-test-review`. Overrides step 3 (orchestration) with 4 concurrent quality dimension reviewers.
 
 | Dimension | Agent | Model | Focus |
 |-----------|-------|-------|-------|

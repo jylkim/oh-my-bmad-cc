@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.3.1] - 2026-03-26
+
+### Fixed
+- Correct upstream skill name references: `bmad-tea-testarch-*` → `bmad-testarch-*` (matching BMAD v6.2.2 upstream naming)
+
 ## [0.3.0] - 2026-03-18
 
 ### Removed

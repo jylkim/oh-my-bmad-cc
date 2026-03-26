@@ -1,11 +1,11 @@
 ---
 name: omb-tea-testarch-automate-parallel
-description: 'Parallel pipeline execution of bmad-tea-testarch-automate. Use when the user says "parallel automate", "fast test automation", "parallel test coverage", or wants to speed up test automation expansion.'
+description: 'Parallel pipeline execution of bmad-testarch-automate. Use when the user says "parallel automate", "fast test automation", "parallel test coverage", or wants to speed up test automation expansion.'
 ---
 
 <steps CRITICAL="TRUE">
 
-1. Read `{project-root}/.claude/skills/bmad-tea-testarch-automate/SKILL.md` and follow its instructions EXACTLY
+1. Read `{project-root}/.claude/skills/bmad-testarch-automate/SKILL.md` and follow its instructions EXACTLY
 2. When the workflow reaches step-file execution, execute steps 1–2 (preflight, identify targets) as normal
 3. After step 2 completes, apply the **parallel execution override** below instead of loading step 3 (orchestration)
 4. After all parallel work completes, resume sequential execution from step 3c (aggregate) onward

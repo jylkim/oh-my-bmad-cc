@@ -1,11 +1,11 @@
 ---
 name: omb-tea-testarch-test-review-parallel
-description: 'Parallel pipeline execution of bmad-tea-testarch-test-review. Use when the user says "parallel test review", "fast test review", "parallel quality review", or wants to speed up test quality evaluation.'
+description: 'Parallel pipeline execution of bmad-testarch-test-review. Use when the user says "parallel test review", "fast test review", "parallel quality review", or wants to speed up test quality evaluation.'
 ---
 
 <steps CRITICAL="TRUE">
 
-1. Read `{project-root}/.claude/skills/bmad-tea-testarch-test-review/SKILL.md` and follow its instructions EXACTLY
+1. Read `{project-root}/.claude/skills/bmad-testarch-test-review/SKILL.md` and follow its instructions EXACTLY
 2. When the workflow reaches step-file execution, execute steps 1–2 (load context, discover tests) as normal
 3. After step 2 completes, apply the **parallel execution override** below instead of loading step 3 (orchestration)
 4. After all parallel work completes, resume sequential execution from step 3f (aggregate scores) onward

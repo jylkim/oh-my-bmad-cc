@@ -1,11 +1,11 @@
 ---
 name: omb-tea-testarch-atdd-parallel
-description: 'Parallel pipeline execution of bmad-tea-testarch-atdd. Use when the user says "parallel ATDD", "fast acceptance tests", "parallel acceptance tests", or wants to speed up ATDD test generation.'
+description: 'Parallel pipeline execution of bmad-testarch-atdd. Use when the user says "parallel ATDD", "fast acceptance tests", "parallel acceptance tests", or wants to speed up ATDD test generation.'
 ---
 
 <steps CRITICAL="TRUE">
 
-1. Read `{project-root}/.claude/skills/bmad-tea-testarch-atdd/SKILL.md` and follow its instructions EXACTLY
+1. Read `{project-root}/.claude/skills/bmad-testarch-atdd/SKILL.md` and follow its instructions EXACTLY
 2. When the workflow reaches step-file execution, execute steps 1–3 (preflight, mode selection, test strategy) as normal
 3. After step 3 completes, apply the **parallel execution override** below instead of loading step 4 (orchestration)
 4. After all parallel work completes, resume sequential execution from step 4c (aggregate) onward
