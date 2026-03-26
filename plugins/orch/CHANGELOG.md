@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.2.2] - 2026-03-26
+
+### Fixed
+- `omb-orch-story-cycle`: correct upstream TEA skill name references: `bmad-tea-testarch-*` → `bmad-testarch-*` (matching BMAD v6.2.2 upstream naming)
+
 ## [0.2.1] - 2026-03-18
 
 ### Changed

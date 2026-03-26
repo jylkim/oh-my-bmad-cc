@@ -23,7 +23,7 @@ Before starting, verify required plugins are installed by checking available ski
 Steps 1, 3, 5 use `/bmad-create-story`, `/bmad-dev-story`, `/bmad-code-review` skills. If bmm skills are not available, inform the user that BMad Method plugin must be installed and **stop the pipeline**.
 
 **Optional — BMad Method Test Architect (tea):**
-Steps 2, 4, 6 use `/bmad-tea-*` skills. If tea skills are not available, **skip Steps 2, 4, and 6** and note them as skipped in the final summary. When TEA is unavailable, the rework flow always uses the MINOR path (Dev Story → Code Review only).
+Steps 2, 4, 6 use `/bmad-testarch-*` skills. If tea skills are not available, **skip Steps 2, 4, and 6** and note them as skipped in the final summary. When TEA is unavailable, the rework flow always uses the MINOR path (Dev Story → Code Review only).
 
 
 ## Story Selection
@@ -46,7 +46,7 @@ Teammate runs: `/bmad-create-story {STORY_ID} yolo`
 
 ### Step 2: ATDD Test Architecture — model: **opus**
 Depends on Step 1. **Skip if TEA is not available.**
-Teammate runs: `/bmad-tea-testarch-atdd {STORY_ID} yolo`
+Teammate runs: `/bmad-testarch-atdd {STORY_ID} yolo`
 > AC analysis + appropriate test level (E2E/API/Component) design decisions. Produces failing test skeletons + implementation checklist.
 
 ### Step 3: Dev Story — model: **sonnet**
@@ -56,7 +56,7 @@ Teammate runs: `/bmad-dev-story {STORY_ID} yolo`
 
 ### Step 4: Test Automation — model: **sonnet**
 Depends on Step 3. **Skip if TEA is not available.**
-Teammate runs: `/bmad-tea-testarch-automate {STORY_ID} yolo`
+Teammate runs: `/bmad-testarch-automate {STORY_ID} yolo`
 > Generate prioritized API/E2E tests, fixtures, and DoD summary on top of ATDD skeletons.
 
 ### Step 5: Code Review — model: **opus**
@@ -67,7 +67,7 @@ Depends on Step 4 (or Step 3 if Step 4 was skipped).
 
 ### Step 6: Test Review — model: **opus**
 Depends on Step 5 passing. **Skip if TEA is not available.**
-Teammate runs: `/bmad-tea-testarch-test-review {STORY_ID} yolo`
+Teammate runs: `/bmad-testarch-test-review {STORY_ID} yolo`
 > Validate test quality against best practices and knowledge base.
 
 ### Step 7: Code Simplification
