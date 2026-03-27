@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.3.1] - 2026-03-27
+
+### Changed
+- `omb-orch-story-cycle-parallel`: simplify rework routing — remove custom severity classification (`MINOR/MODERATE/SEVERE`), use native code review story status to determine rework
+- `omb-orch-story-cycle-parallel`: remove ATDD rework path — rework always starts from Dev Story (Step 2), since `omb-dev-story-parallel` already has a red phase
+
+### Fixed
+- `omb-orch-story-cycle-parallel`: add execution rules preventing coordinator from bypassing pipeline (no direct code edits, no custom sub-agents, mandatory rework routing)
+
 ## [0.3.0] - 2026-03-27
 
 ### Changed

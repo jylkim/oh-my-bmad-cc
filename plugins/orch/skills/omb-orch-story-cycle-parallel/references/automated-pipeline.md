@@ -6,10 +6,13 @@ This document defines the automated execution pipeline invoked after the user se
 
 <rules CRITICAL="TRUE">
 1. **Coordinator executes all steps directly.** No teammates for Steps 1–5. The coordinator invokes each slash command itself.
-2. All steps run in **yolo** mode — no user interaction during automated steps.
-3. **No commits until Step 7.** No `git commit`, `git add`, or staging operations during Steps 1–5.
-4. **On failure:** Report which step failed and why, then STOP immediately. Do not continue.
-5. **One step at a time.** Complete each step fully before starting the next.
+2. **Coordinator NEVER writes or edits code.** All code changes must go through slash commands. Do not open editors, use Edit/Write tools, or spawn custom sub-agents to fix code directly.
+3. **No custom sub-agents.** The only teammate the coordinator may spawn is the simplify-applier in Step 6. All other work goes through slash commands.
+4. All steps run in **yolo** mode — no user interaction during automated steps.
+5. **No commits until Step 7.** No `git commit`, `git add`, or staging operations during Steps 1–5.
+6. **On failure:** Report which step failed and why, then STOP immediately. Do not continue.
+7. **One step at a time.** Complete each step fully before starting the next.
+8. **Rework routing is mandatory.** When the story status is `in-progress` after code review, the coordinator MUST follow the Rework Decision table — never skip rework or apply fixes directly regardless of how trivial the issues appear.
 </rules>
 
 ## Step 1: ATDD Test Architecture
@@ -30,30 +33,22 @@ Coordinator directly runs: `/bmad-testarch-automate {STORY_ID} yolo`
 
 ## Step 4: Code Review
 
-- **Iterations 1–2:**
-  Coordinator directly runs: `/bmad-code-review {STORY_ID} yolo, create action items for all the issues and classify each issue scope as MINOR, MODERATE, or SEVERE`
-- **Iteration 3 (final):**
+- **Rework remaining:**
+  Coordinator directly runs: `/bmad-code-review {STORY_ID} yolo, create action items for all the issues`
+- **Final iteration (no rework remaining):**
   Coordinator directly runs: `/bmad-code-review {STORY_ID} yolo, auto accept and fix all the issues`
 
 ## Rework Decision (after Step 4)
 
 After each code review, read the story file and check story status:
 
-- **`done`** → proceed to Step 5
-- **`in-progress`** (iterations 1–2) → determine rework scope from the highest-severity issue classification (see Rework Routing Table)
-- **`in-progress`** (iteration 3, final) → proceed to Step 5 regardless — remaining issues are likely false positives
-
-### Rework Routing Table
-
-Use the **highest** severity among unresolved issues to determine the rework path:
-
-| Highest Severity | Return To | Steps to Re-run |
+| Story status | Rework remaining | Action |
 |---|---|---|
-| **MINOR** (style, naming, refactoring) | Step 2 | Dev Story → Code Review |
-| **MODERATE** (logic change, API change) | Step 2 | Dev Story → Test Automation → Code Review |
-| **SEVERE** (acceptance criteria were wrong) | Step 1 | ATDD → Dev Story → Test Automation → Code Review |
+| `done` | — | Proceed to Step 5 |
+| `in-progress` | Yes | Re-run Step 2 (Dev Story) → Step 3 (Test Automation) → Step 4 (Code Review) |
+| `in-progress` | No (final) | Proceed to Step 5 — remaining issues are deferred |
 
-> When `pipeline_mode` is `tea-excluded`, all severities use the MINOR path (Dev Story → Code Review only), since ATDD and Test Automation steps are unavailable.
+> When `pipeline_mode` is `tea-excluded`, rework skips Step 3 (Test Automation): Dev Story → Code Review only.
 
 Maximum **3 total iterations** (initial run + up to 2 rework cycles).
 
@@ -96,7 +91,7 @@ The coordinator directly performs the final commit:
 After all steps complete, provide a summary of the full pipeline run:
 
 - Total iterations executed
-- Rework paths taken (if any) with severity classifications
+- Rework cycles taken (if any)
 - Steps skipped (TEA-excluded steps, etc.)
 - Deferred items (count and file location)
 - Final story status
