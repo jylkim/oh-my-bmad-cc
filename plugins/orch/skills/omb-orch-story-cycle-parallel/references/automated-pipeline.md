@@ -16,7 +16,7 @@ This document defines the automated execution pipeline invoked after the user se
 
 **Skip if `pipeline_mode` is `tea-excluded`.**
 
-Coordinator directly runs: `/omb-tea-testarch-atdd-parallel {STORY_ID} yolo`
+Coordinator directly runs: `/bmad-testarch-atdd {STORY_ID} yolo`
 
 ## Step 2: Dev Story Implementation
 
@@ -26,14 +26,14 @@ Coordinator directly runs: `/omb-dev-story-parallel {STORY_ID} yolo`
 
 **Skip if `pipeline_mode` is `tea-excluded`.**
 
-Coordinator directly runs: `/omb-tea-testarch-automate-parallel {STORY_ID} yolo`
+Coordinator directly runs: `/bmad-testarch-automate {STORY_ID} yolo`
 
 ## Step 4: Code Review
 
 - **Iterations 1–2:**
-  Coordinator directly runs: `/omb-code-review-parallel {STORY_ID} yolo, create action items for all the issues and classify each issue scope as MINOR, MODERATE, or SEVERE`
+  Coordinator directly runs: `/bmad-code-review {STORY_ID} yolo, create action items for all the issues and classify each issue scope as MINOR, MODERATE, or SEVERE`
 - **Iteration 3 (final):**
-  Coordinator directly runs: `/omb-code-review-parallel {STORY_ID} yolo, auto accept and fix all the issues`
+  Coordinator directly runs: `/bmad-code-review {STORY_ID} yolo, auto accept and fix all the issues`
 
 ## Rework Decision (after Step 4)
 
@@ -61,7 +61,7 @@ Maximum **3 total iterations** (initial run + up to 2 rework cycles).
 
 **Skip if `pipeline_mode` is `tea-excluded`.**
 
-Coordinator directly runs: `/omb-tea-testarch-test-review-parallel {STORY_ID} yolo`
+Coordinator directly runs: `/bmad-testarch-test-review {STORY_ID} yolo`
 
 ## Step 6: Simplify + Defer
 

@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.3.0] - 2026-03-27
+
+### Changed
+- `omb-orch-story-cycle-parallel`: migrate deprecated plugin skill references to upstream BMAD v6.2.2 skills
+  - `/omb-create-story-parallel` → `/bmad-create-story`
+  - `/omb-tea-testarch-atdd-parallel` → `/bmad-testarch-atdd`
+  - `/omb-tea-testarch-automate-parallel` → `/bmad-testarch-automate`
+  - `/omb-code-review-parallel` → `/bmad-code-review`
+  - `/omb-tea-testarch-test-review-parallel` → `/bmad-testarch-test-review`
+  - `/omb-dev-story-parallel` — retained (no upstream subagent equivalent)
+
 ## [0.2.2] - 2026-03-26
 
 ### Fixed

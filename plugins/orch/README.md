@@ -1,6 +1,6 @@
 # orch
 
-Pipeline orchestration skills for BMAD workflows. Automates multi-step story execution cycles by coordinating sequential workflow steps across BMM and TEA plugins.
+Pipeline orchestration skills for BMAD workflows. Automates multi-step story execution cycles by coordinating upstream BMAD skills and `omb-dev-story-parallel`.
 
 ## Skills
 
@@ -29,17 +29,17 @@ Maximum 3 total iterations (initial + up to 2 rework cycles). TEA is optional �
 
 ### [omb-orch-story-cycle-parallel](skills/omb-orch-story-cycle-parallel/SKILL.md)
 
-Parallel story cycle orchestrator with interactive story creation, deferred work tracking, and severity-based rework.
+Story cycle orchestrator with deferred work tracking and severity-based rework. Uses `omb-dev-story-parallel` for TDD implementation; all other steps use upstream BMAD skills.
 
 | Step | Skill | Model | Required |
 |---|---|---|---|
-| 1. Create Story | `/omb-create-story-parallel` | opus | bmm |
-| 2. ATDD | `/omb-tea-testarch-atdd-parallel` | opus | tea (optional) |
-| 3. Dev Story | `/omb-dev-story-parallel` | sonnet | bmm |
-| 4. Test Automation | `/omb-tea-testarch-automate-parallel` | sonnet | tea (optional) |
-| 5. Code Review | `/omb-code-review-parallel` | opus | bmm |
-| 6. Test Review | `/omb-tea-testarch-test-review-parallel` | opus | tea (optional) |
+| 1. Create Story | `/bmad-create-story` | opus | bmm |
+| 2. ATDD | `/bmad-testarch-atdd` | opus | tea (optional) |
+| 3. Dev Story | `/omb-dev-story-parallel` | sonnet | bmm plugin |
+| 4. Test Automation | `/bmad-testarch-automate` | sonnet | tea (optional) |
+| 5. Code Review | `/bmad-code-review` | opus | bmm |
+| 6. Test Review | `/bmad-testarch-test-review` | opus | tea (optional) |
 | 7. Simplify + Defer | `/simplify` + simplify-applier | sonnet | built-in |
 | 8. Commit | coordinator | — | — |
 
-Uses parallel skill variants for all steps. The coordinator directly executes each parallel skill (no teammate delegation) to avoid 3-level agent nesting. Story creation runs interactively (Scope Discovery with user), then the remaining pipeline runs fully automated. After code review, the rework path follows the same severity-based routing as `omb-orch-story-cycle`. The `/simplify` step classifies findings as fix/defer/reject — deferred items are tracked in `deferred-work.md`.
+The coordinator directly executes each skill (no teammate delegation) to avoid 3-level agent nesting. After code review, the rework path follows the same severity-based routing as `omb-orch-story-cycle`. The `/simplify` step classifies findings as fix/defer/reject — deferred items are tracked in `deferred-work.md`.

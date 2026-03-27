@@ -1,11 +1,11 @@
 ---
 name: omb-orch-story-cycle-parallel
-description: 'Parallel story cycle orchestrator with interactive story creation, deferred work tracking, and severity-based rework. Use when the user says "parallel story cycle", "fast story cycle", "parallel BMAD cycle", or wants accelerated end-to-end story execution.'
+description: 'Parallel story cycle orchestrator with deferred work tracking and severity-based rework. Use when the user says "parallel story cycle", "fast story cycle", "parallel BMAD cycle", or wants accelerated end-to-end story execution.'
 ---
 
 # Parallel Story Cycle Orchestrator
 
-You are a **pipeline coordinator** that directly executes each step. You orchestrate the full story lifecycle using parallel skill variants, with an interactive story creation phase followed by an automated pipeline. Unlike `omb-orch-story-cycle` (which delegates to teammates), you invoke each parallel skill directly to avoid 3-level agent nesting.
+You are a **pipeline coordinator** that directly executes each step. You orchestrate the full story lifecycle using upstream BMAD skills and `omb-dev-story-parallel` for TDD implementation. Unlike `omb-orch-story-cycle` (which delegates to teammates), you invoke each skill directly to avoid 3-level agent nesting.
 
 ```
 Create Story (interactive) → ATDD → Dev Story → Test Automation → Code Review → Test Review → Simplify+Defer → Commit
@@ -17,11 +17,11 @@ Create Story (interactive) → ATDD → Dev Story → Test Automation → Code R
 
 Before starting, verify required plugins are installed by checking available skills:
 
-**Required — BMad Method (bmm):**
-The pipeline uses `/omb-create-story-parallel`, `/omb-dev-story-parallel`, `/omb-code-review-parallel`. If bmm parallel skills are not available, inform the user that BMad Method plugin must be installed and **stop the pipeline**.
+**Required — BMad Method:**
+The pipeline uses `/bmad-create-story`, `/bmad-code-review` (upstream), and `/omb-dev-story-parallel` (plugin). If these skills are not available, inform the user and **stop the pipeline**.
 
 **Optional — BMad Method Test Architect (tea):**
-The pipeline uses `/omb-tea-testarch-atdd-parallel`, `/omb-tea-testarch-automate-parallel`, `/omb-tea-testarch-test-review-parallel`. If tea parallel skills are not available, set `tea_available = false` — TEA steps will be skipped.
+The pipeline uses `/bmad-testarch-atdd`, `/bmad-testarch-automate`, `/bmad-testarch-test-review`. If tea skills are not available, set `tea_available = false` — TEA steps will be skipped.
 
 ## Story Selection
 
@@ -41,9 +41,9 @@ Track minimal state throughout the pipeline:
 - `iteration` — current pipeline iteration (1–3)
 - `pipeline_mode` — `full` or `tea-excluded`
 
-## Phase 1: Interactive Story Creation
+## Phase 1: Story Creation
 
-The coordinator **directly** invokes `/omb-create-story-parallel` (not through a teammate). This allows the user to participate in Scope Discovery Q&A — the interactive phase where development goals are narrowed through targeted questions.
+The coordinator **directly** invokes `/bmad-create-story` (not through a teammate).
 
 Wait for story creation to complete before proceeding.
 
