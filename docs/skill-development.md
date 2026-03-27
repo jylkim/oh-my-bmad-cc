@@ -159,4 +159,4 @@ When creating or modifying a skill, update the plugin's `README.md` (e.g., `plug
 ## Reference Examples
 
 - `plugins/bmm/skills/omb-dev-story-parallel/` — 4-stage TDD pipeline, 2 branches (implementation + review continuation)
-- `plugins/bmm/skills/omb-quick-dev-isolated-review/` — single-agent context isolation (no team, foreground sub-agent)
+- `plugins/orch/skills/omb-orch-story-cycle-parallel/` — coordinator pattern with reference files and severity-based rework routing

@@ -41,19 +41,16 @@ Each plugin maintains its own `CHANGELOG.md` at `plugins/{plugin}/CHANGELOG.md`,
 
 ## [0.2.0] - 2026-03-10
 
-### Added
-- Domain research parallel skill (`omb-domain-research-parallel`)
+### Changed
+- Coordinator direct execution for pipeline steps
 
 ### Fixed
 - Persona path resolution in all pipeline skills
 
-### Changed
-- Minimum prerequisite updated to BMAD Method v6+
-
 ## [0.1.0] - 2026-02-20
 
 ### Added
-- Initial release with 6 parallel pipeline skills
+- Initial release with story cycle orchestration skills
 - Plugin marketplace configuration
 ```
 
