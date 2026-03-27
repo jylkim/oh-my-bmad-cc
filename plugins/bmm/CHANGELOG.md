@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.9.0] - 2026-03-27
+
+### Removed
+- `omb-create-story-parallel` — superseded by upstream `bmad-create-story` native subagent support (BMAD v6.2.2)
+- `omb-code-review-parallel` — superseded by upstream `bmad-code-review` subagent-based 3-layer review
+- `omb-technical-research-parallel` — superseded by upstream `bmad-technical-research` native subagent support
+- `omb-market-research-parallel` — superseded by upstream `bmad-market-research` native subagent support
+- `omb-domain-research-parallel` — superseded by upstream `bmad-domain-research` native subagent support
+
 ## [0.8.0] - 2026-03-26
 
 ### Removed
