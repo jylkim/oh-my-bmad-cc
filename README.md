@@ -1,6 +1,8 @@
 # oh-my-bmad-cc
 
-Scale-out extensions for [BMAD Method](https://github.com/bmad-code-org/BMAD-METHOD). BMAD Method runs each workflow as a single agent process — this plugin scales it out to a team of specialized agents working concurrently via Claude Code Agent Teams.
+Pipeline extensions for [BMAD Method](https://github.com/bmad-code-org/BMAD-METHOD). Provides parallel TDD implementation via Agent Teams and multi-step story cycle orchestration.
+
+> **Note:** Upstream BMAD v6.2.2 added native subagent support to most workflows. This plugin retains only features with no upstream equivalent: `omb-dev-story-parallel` (dependency graph-based TDD pipeline) and story cycle orchestration.
 
 ## Installation
 
@@ -45,42 +47,22 @@ Restart Claude Code after installation.
 
 ### [bmm](plugins/bmm/README.md)
 
-Parallel pipeline skills for BMAD BMM workflows. Parallelizes story creation, story development (TDD), code review, and research (technical, market, domain) using concurrent Agent Teams.
-
-### [tea](plugins/tea/README.md)
-
-Parallel pipeline skills for BMAD TEA workflows. Parallelizes test generation (ATDD, automate) and test quality review using concurrent Agent Teams.
+Parallel TDD pipeline skill for BMAD dev-story workflow. Runs independent implementation tasks concurrently with dependency graph-based parallelism.
 
 ### [orch](plugins/orch/README.md)
 
-Pipeline orchestration skills for BMAD workflows. Automates multi-step story execution cycles by coordinating sequential workflow steps across BMM and TEA plugins.
+Pipeline orchestration skills for BMAD workflows. Automates multi-step story execution cycles by coordinating upstream BMAD skills and `omb-dev-story-parallel`.
 
 ## Roadmap
 
-### bmm — Parallel/sub-agent skills for BMAD BMM workflows
+### bmm — Parallel TDD pipeline
 
-- [x] **create-story parallel** — Parallelize architecture analysis and tech research with 2 concurrent agents after interactive scope discovery.
 - [x] **dev-story parallel** — TDD pipeline with per-task parallelism based on dependency graph.
-- [x] **code-review parallel** — Run 4 independent review dimensions (git audit, AC validation, task audit, code quality) concurrently.
-- [x] **technical-research parallel** — Run 4 research dimensions (tech stack, integration, architecture, implementation) concurrently.
-- [x] **market-research parallel** — Run 4 research dimensions (behavior, pain points, decisions, competitive) concurrently.
-- [x] **domain-research parallel** — Run 4 research dimensions (industry, competitive, regulatory, technical trends) concurrently.
-- [ ] **validate-prd parallel** — Run 10 independent validation dimensions (density, brief coverage, measurability, traceability, etc.) concurrently against the same PRD document. Same pattern as code-review-parallel.
-- [ ] **check-implementation-readiness parallel** — Parallelize 3 independent validation analyses (FR coverage, UX alignment, epic quality) after requirement extraction, then aggregate into readiness report.
-- [ ] **create-epics-and-stories parallel** — After epic list approval, generate stories per epic concurrently with dedicated sub-agents.
-- [ ] **qa-generate-e2e-tests parallel** — Generate E2E tests per feature/epic area in parallel. Already an `autonomous: true` workflow.
-- [ ] **document-project parallel** — After project type detection, parallelize per-section documentation (API, data models, UI, tests, source tree).
 
 ### orch — Pipeline orchestration
 
-- [x] **story-cycle** — Automated 8-step story execution pipeline with severity-based rework flow. Uses original (non-parallel) skill variants.
-- [x] **story-cycle-parallel** — Same pipeline using parallel skill variants. Interactive story creation (Scope Discovery), automated pipeline with deferred work tracking.
-
-### tea — Parallel skills for BMAD TEA workflows
-
-- [x] **test-review parallel** — Run 4 independent quality evaluation dimensions (determinism, isolation, maintainability, performance) concurrently, then aggregate into report.
-- [x] **automate parallel** — Run 2–3 test generation workers (API, E2E, backend) concurrently based on detected stack type.
-- [x] **atdd parallel** — Run 2 independent test generation workers (API tests, E2E tests) concurrently, then aggregate output.
+- [x] **story-cycle** — Automated story execution pipeline with severity-based rework flow.
+- [x] **story-cycle-parallel** — Same pipeline using `omb-dev-story-parallel` for TDD step, with deferred work tracking.
 
 ## Development Guide
 
