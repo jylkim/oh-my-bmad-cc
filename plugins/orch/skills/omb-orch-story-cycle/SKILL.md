@@ -25,6 +25,9 @@ Steps 1, 3, 5 use `/bmad-create-story`, `/bmad-dev-story`, `/bmad-code-review` s
 **Optional — BMad Method Test Architect (tea):**
 Steps 2, 4, 6 use `/bmad-testarch-*` skills. If tea skills are not available, **skip Steps 2, 4, and 6** and note them as skipped in the final summary. When TEA is unavailable, the rework flow always uses the MINOR path (Dev Story → Code Review only).
 
+**Optional — Codex (codex):**
+The pipeline can delegate code review to Codex via the `codex:codex-rescue` subagent. If the subagent is available, set `codex_available = true`. Otherwise set `codex_available = false` — code review falls back to direct `/bmad-code-review` invocation.
+
 
 ## Story Selection
 
@@ -61,8 +64,15 @@ Teammate runs: `/bmad-testarch-automate {STORY_ID} yolo`
 
 ### Step 5: Code Review — model: **opus**
 Depends on Step 4 (or Step 3 if Step 4 was skipped).
+
+**When `codex_available` is true:** Spawn a `codex:codex-rescue` subagent to delegate the review to Codex:
+- Iterations 1–2: Task: `$bmad-code-review {STORY_ID} yolo, create action items for all the issues and classify each issue scope as MINOR, MODERATE, or SEVERE`
+- Iteration 3 (final): Task: `$bmad-code-review {STORY_ID} yolo, auto accept and fix all the issues`
+
+**Fallback — when `codex_available` is false:**
 - Iterations 1–2: Teammate runs: `/bmad-code-review {STORY_ID} yolo, create action items for all the issues and classify each issue scope as MINOR, MODERATE, or SEVERE`
 - Iteration 3 (final): Teammate runs: `/bmad-code-review {STORY_ID} yolo, auto accept and fix all the issues`
+
 > Adversarial review: false claim detection, AC validation, security/performance analysis.
 
 ### Step 6: Test Review — model: **opus**

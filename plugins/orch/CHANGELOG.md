@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.4.0] - 2026-04-01
+
+### Added
+- Optional Codex integration for code review — both orchestrators can delegate review to `codex:codex-rescue` subagent (`$bmad-code-review`) with fallback to direct `/bmad-code-review` invocation
+
 ## [0.3.1] - 2026-03-27
 
 ### Changed

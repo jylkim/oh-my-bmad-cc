@@ -23,6 +23,9 @@ The pipeline uses `/bmad-create-story`, `/bmad-code-review` (upstream), and `/om
 **Optional — BMad Method Test Architect (tea):**
 The pipeline uses `/bmad-testarch-atdd`, `/bmad-testarch-automate`, `/bmad-testarch-test-review`. If tea skills are not available, set `tea_available = false` — TEA steps will be skipped.
 
+**Optional — Codex (codex):**
+The pipeline can delegate code review to Codex via the `codex:codex-rescue` subagent. If the subagent is available, set `codex_available = true`. Otherwise set `codex_available = false` — code review falls back to direct `/bmad-code-review` invocation.
+
 ## Story Selection
 
 1. Read `_bmad-output/implementation-artifacts/sprint-status.yaml`.
@@ -38,6 +41,7 @@ Track minimal state throughout the pipeline:
 - `STORY_TITLE` — selected story title
 - `implementation_artifacts` — resolved path to implementation artifacts directory
 - `tea_available` — whether TEA plugin is installed
+- `codex_available` — whether `codex:codex-rescue` subagent is available
 - `iteration` — current pipeline iteration (1–3)
 - `pipeline_mode` — `full` or `tea-excluded`
 

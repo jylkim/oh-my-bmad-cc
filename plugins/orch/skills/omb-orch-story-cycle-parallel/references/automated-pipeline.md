@@ -33,6 +33,17 @@ Coordinator directly runs: `/bmad-testarch-automate {STORY_ID} yolo`
 
 ## Step 4: Code Review
 
+### When `codex_available` is true
+
+Spawn a `codex:codex-rescue` subagent to delegate the review to Codex:
+
+- **Rework remaining:**
+  Task: `$bmad-code-review {STORY_ID} yolo, create action items for all the issues`
+- **Final iteration (no rework remaining):**
+  Task: `$bmad-code-review {STORY_ID} yolo, auto accept and fix all the issues`
+
+### Fallback: when `codex_available` is false
+
 - **Rework remaining:**
   Coordinator directly runs: `/bmad-code-review {STORY_ID} yolo, create action items for all the issues`
 - **Final iteration (no rework remaining):**
